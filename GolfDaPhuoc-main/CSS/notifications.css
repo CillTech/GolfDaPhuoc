@@ -1,0 +1,146 @@
+
+.activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.activity-card {
+    background: var(--bg-primary, #ffffff); /* */
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md); /* */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border-color, #e5e7eb); /* */
+    display: flex;
+    flex-direction: column;
+}
+
+.activity-card:hover {
+    transform: translateY(-8px); /* Kế thừa hiệu ứng từ .about-card */
+    box-shadow: var(--shadow-lg); /* */
+}
+
+/* =========================================================
+   CẬP NHẬT LẠI KHUNG ẢNH ĐỂ CÓ HIỆU ỨNG ZOOM KHI HOVER
+   ========================================================= */
+.activity-image-wrapper {
+    position: relative;
+    height: 220px;
+    width: 100%;
+    display: block; /* Thêm display block cho thẻ a */
+    overflow: hidden; /* Để ảnh zoom không bị tràn ra ngoài card */
+}
+
+.activity-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease; /* Thêm transition cho ảnh */
+}
+
+/* Hiệu ứng phóng to nhẹ ảnh khi di chuột vào thẻ a */
+.activity-image-wrapper:hover img {
+    transform: scale(1.08); 
+}
+
+/* =========================================================
+   CẬP NHẬT LẠI BADGE NGÀY THÁNG (KHÔNG ĐÈ LÊN ẢNH NỮA)
+   ========================================================= */
+.activity-date-badge {
+    display: inline-flex;
+    align-items: center;
+    background: var(--secondary-color, #06b6d4);
+    color: #ffffff;
+    padding: 6px 15px;
+    border-radius: 6px; /* Trả lại bo góc đều 4 góc như ảnh bạn gửi */
+    font-size: 0.85rem;
+    font-weight: 600;
+    gap: 8px;
+    
+    /* Bí kíp đè 1 nửa ở đây */
+    margin-top: -40px; /* Kéo ngược ô thời gian lên trên 40px */
+    margin-bottom: 15px; /* Đẩy tiêu đề bài viết xích xuống một chút */
+    position: relative; /* Bắt buộc phải có để z-index hoạt động */
+    z-index: 10; /* Đảm bảo thẻ thời gian luôn nổi lên trên bức ảnh */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Thêm tí bóng mờ nhẹ cho ô nổi bật hơn */
+}
+
+/* Hiệu ứng đổi màu tiêu đề khi di chuột */
+.activity-title {
+    transition: color 0.3s ease;
+}
+
+.activity-title:hover {
+    color: var(--primary-color, #2563eb);
+}
+
+.activity-content {
+    /* Trả lại padding 25px cho cả 4 góc để chữ bên dưới không bị dính vào lề */
+    padding: 25px; 
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.activity-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary); /* */
+    margin-bottom: 15px;
+    line-height: 1.4;
+    /* Hiệu ứng giới hạn 2 dòng tiêu đề */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.activity-excerpt {
+    color: var(--text-secondary); /* */
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.activity-footer {
+    padding: 15px 25px;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    background-color: var(--bg-secondary, #f8fafc); /* */
+}
+
+.author-info, .comment-info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Responsive cho mobile */
+@media (max-width: 768px) {
+    .activities-grid {
+        grid-template-columns: 1fr;
+        padding: 0 15px;
+    }
+}
+/* Thêm đoạn này vào cuối file notifications.css */
+
+.Introduce_contents {
+    /* Đảm bảo có khoảng trống ít nhất 100px trước khi chạm tới footer */
+    padding-bottom: 100px !important; 
+}
+
+.activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+    /* Thêm margin bottom để đẩy các card lên */
+    margin-bottom: 50px; 
+}

@@ -1,0 +1,168 @@
+/* ============================================================================
+   CONTAINER CƠ BẢN
+   ============================================================================ */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+}
+
+/* ============================================================================
+   NÚT BẤM (BUTTON) BÌNH THƯỜNG - TỐI GIẢN
+   ============================================================================ */
+.btn-normal {
+  display: inline-block;
+  padding: 12px 28px;
+  background-color: var(--primary-color, #2563eb);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px; /* Bo góc nhẹ nhàng */
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.btn-normal:hover {
+  background-color: var(--primary-dark, #1d4ed8); /* Đậm hơn khi di chuột */
+  transform: translateY(-2px); /* Chỉ nhích lên một chút cho có cảm giác bấm */
+  color: #ffffff;
+}
+
+/* ============================================================================
+   BỐ CỤC TRANG ABOUT
+   ============================================================================ */
+.about-main {
+  padding: 60px 0;
+  background-color: var(--bg-primary, #ffffff);
+}
+
+.about-section {
+  margin-bottom: 50px;
+  padding: 40px;
+  background: var(--bg-primary, #ffffff);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Bóng đổ nhẹ, phẳng */
+  border: 1px solid var(--border-color, #e5e7eb);
+}
+
+.section-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text-primary, #1f2937);
+  margin-bottom: 20px;
+}
+
+.section-title.center-text {
+  text-align: center;
+}
+
+.section-content p {
+  color: var(--text-secondary, #4b5563);
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 15px;
+}
+
+/* ============================================================================
+   GRID 2 CỘT (Tôn chỉ & Mục đích)
+   ============================================================================ */
+.about-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.about-card {
+  background: var(--bg-secondary, #f8fafc);
+  padding: 35px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color, #e5e7eb);
+  transition: transform 0.3s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-5px);
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  color: var(--text-primary, #1f2937);
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.about-card p {
+  color: var(--text-secondary, #4b5563);
+  line-height: 1.7;
+}
+
+/* ============================================================================
+   GRID 3 CỘT (Giá trị cốt lõi)
+   ============================================================================ */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.value-item {
+  background: var(--bg-secondary, #f8fafc);
+  padding: 30px 20px;
+  border-radius: 12px;
+  
+  border: 1px solid var(--border-color, #e5e7eb);
+}
+
+.value-item h4 {
+  font-size: 1.3rem;
+  color: var(--primary-color, #2563eb);
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-weight: bold;
+  text-align: center;
+}
+
+.value-item p {
+  color: var(--text-secondary, #4b5563);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .about-section {
+    padding: 20px;
+  }
+}
+
+/* Định dạng cho toàn bộ khối list con */
+.value-item .sub-list {
+    padding-left: 25px; /* Đẩy nguyên khối list con lùi vào trong 25px */
+    margin-top: 8px;    /* Cách dòng chữ cha ở trên một chút cho thoáng */
+    margin-bottom: 10px; /* Cách dòng chữ bên dưới một chút */
+}
+
+/* Định dạng cho từng dòng chữ bên trong list con */
+.value-item .sub-list li {
+    font-size: 0.9em;       /* Chữ nhỏ hơn 10% so với bình thường */
+    color: #555555;         /* (Tùy chọn) Làm màu chữ nhạt đi một xíu để phân cấp rõ hơn */
+    list-style-type: disc;  /* (Tùy chọn) Hiển thị dấu chấm tròn đầu dòng */
+    text-align: left;       /* Ép chữ căn trái để dễ đọc hơn nếu khối bên ngoài đang bị căn giữa */
+}
