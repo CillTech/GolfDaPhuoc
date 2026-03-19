@@ -24,23 +24,23 @@ include "header.php";
 
     <!-- Banner Image Section -->
     <section id="Banner">
-        <img src="Image/Slide1.jpg" alt="TeachHub Banner" loading="eager" />
+        <img src="Image/Slide1.jpg" alt="Banner" loading="eager" />
     </section>
     
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="hero-content">
             <div class="hero-text">
-                <h1 class="hero-title">Kết nối học tập thông minh</h1>
-                <p class="hero-subtitle">Tìm gia sư phù hợp hoặc trở thành gia sư chuyên nghiệp với TeachHub</p>
+                <h1 class="hero-title">CLB Golf Đa Phước</h1>
+                <p class="hero-subtitle">Đồng hành cùng thế hệ trẻ Đà Nẵng</p>
                 <div class="hero-buttons">
                     <a href="Form_parent.php" class="btn btn-primary">
                         <i class="fas fa-search"></i>
-                        Tìm gia sư
+                        Tìm hiểu
                     </a>
                     <a href="Form_tutor.php" class="btn btn-secondary">
                         <i class="fas fa-chalkboard-teacher"></i>
-                        Trở thành gia sư
+                        Tài trợ
                     </a>
                     <a href="About.php" class="btn btn-primary">
                         Biết thêm về chúng tôi
@@ -50,16 +50,16 @@ include "header.php";
             <!-- Thống kê nổi bật -->
             <div class="hero-stats">
                 <div class="stat-item">
-                    <div class="stat-number">500+</div>
-                    <div class="stat-label">Gia sư chuyên nghiệp</div>
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Kỹ sư chuyên nghiệp</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">1000+</div>
-                    <div class="stat-label">Học sinh thành công</div>
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Sinh viên thành công</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-number">98%</div>
-                    <div class="stat-label">Tỷ lệ hài lòng</div>
+                    <div class="stat-label">Tỷ lệ tốt nghiệp loại giỏi</div>
                 </div>
             </div>
         </div>

@@ -1,0 +1,112 @@
+/* ============================================================================
+   BỐ CỤC TRANG BAN ĐIỀU HÀNH
+   ============================================================================ */
+.team-main {
+    padding: 60px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Kế thừa từ class full-width của trang Donate để căn giữa chữ Hero */
+.text-center {
+    text-align: center;
+}
+
+.full-width {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Lưới danh sách thành viên */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 35px;
+    margin-top: 20px;
+}
+
+/* Thẻ nhân sự */
+.team-card {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-top: 5px solid var(--primary-color); /* Viền xanh chuẩn style */
+    padding: 40px 30px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Khung ảnh đại diện */
+.member-avatar {
+    width: 130px;
+    height: 130px;
+    background-color: #e5e7eb; /* Màu xám nhạt làm nền khi chưa có ảnh */
+    border-radius: 50%;
+    margin: 0 auto 25px auto;
+    overflow: hidden; /* Đảm bảo ảnh bên trong bị cắt xén theo hình tròn */
+    border: 3px solid #f3f4f6; /* Viền mỏng bên ngoài ảnh */
+}
+
+/* Định dạng cho ảnh thật khi được thêm vào */
+.member-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Typography cho thông tin */
+.member-name {
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.member-role {
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.member-bio {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Responsive cho màn hình nhỏ */
+@media (max-width: 768px) {
+    .team-main {
+        padding: 40px 15px;
+    }
+    .team-card {
+        padding: 30px 20px;
+    }
+}
+
+/* ============================================================================
+   TINH CHỈNH LẠI KHOẢNG CÁCH DỌC PHẦN TIÊU ĐỀ
+   ============================================================================ */
+.hero-section.text-center {
+    min-height: auto; /* Bỏ chiều cao tối thiểu 500px mặc định */
+    padding-top: 80px; /* Giảm viền trên (mặc định là 80px) */
+    padding-bottom: 40px; /* Giảm viền dưới */
+}
+
+.hero-section.text-center .hero-title {
+    margin-bottom: 12px; /* Giảm khoảng cách giữa Tên tiêu đề và Đoạn văn phụ */
+}
+
+.hero-section.text-center .hero-subtitle {
+    margin-bottom: 0; /* Bỏ khoảng trống thừa dưới đáy đoạn văn phụ */
+}

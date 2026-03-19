@@ -11,7 +11,9 @@ $menuDefinitions = [
     [
         'label' => 'Giới thiệu',
         'href_php' => 'About.php',
-        'children' => []
+        'children' => [
+            ['label' => 'Ban điều hành Quỹ', 'href_php' => 'ExecutiveBoard.php'],
+        ]
     ],
     [
         'label' => 'Thông báo',
@@ -62,13 +64,13 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
 <body>
     <header class="custom_header">
-        <div class="logo-banner-svg-wrapper">
+        <a href="index.php" class="logo-banner-svg-wrapper">
             <svg class="logo-banner-svg" viewBox="0 0 180 180" preserveAspectRatio="none">
                 <path d="M 0,0 L 180,0 L 180,147 Q 180,162 165,163.5 L 15,178.5 Q 0,180 0,165 Z" fill="#6dcaec"/>
             </svg>
             
             <img src="Image/logodaphuoc.png" alt="Logo" class="logo-img">
-        </div>
+        </a>
 
         <div class="menu-toggle" id="menuToggle" onclick="toggleMobileMenu()">
             <span></span><span></span><span></span>

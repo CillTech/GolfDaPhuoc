@@ -81,7 +81,6 @@
   background: var(--bg-secondary, #f8fafc);
   padding: 35px;
   border-radius: 12px;
-  border: 1px solid var(--border-color, #e5e7eb);
   transition: transform 0.3s ease;
 }
 
@@ -120,8 +119,6 @@
   background: var(--bg-secondary, #f8fafc);
   padding: 30px 20px;
   border-radius: 12px;
-  
-  border: 1px solid var(--border-color, #e5e7eb);
 }
 
 .value-item h4 {
@@ -165,4 +162,18 @@
     color: #555555;         /* (Tùy chọn) Làm màu chữ nhạt đi một xíu để phân cấp rõ hơn */
     list-style-type: disc;  /* (Tùy chọn) Hiển thị dấu chấm tròn đầu dòng */
     text-align: left;       /* Ép chữ căn trái để dễ đọc hơn nếu khối bên ngoài đang bị căn giữa */
+}
+
+.about-card, 
+.value-item {
+    border: 1px solid #e5e7eb; /* Viền mờ bao quanh để giữ khung */
+    border-top: 5px solid #2563eb; /* Cạnh trên dày và có màu xanh nổi bật */
+    border-radius: 12px; /* Giữ bo góc */
+    transition: transform 0.3s ease;
+}
+
+.about-card:hover, 
+.value-item:hover {
+    border-top-width: 8px; /* Dày lên một chút khi di chuột vào */
+    transform: translateY(-5px);
 }
