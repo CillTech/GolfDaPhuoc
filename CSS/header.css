@@ -1,8 +1,4 @@
-/* ============================================================================
-   HEADER & NAVIGATION - HEADER.CSS
-   ============================================================================ */
 
-/* Container chính của Header */
 .custom_header {
   display: flex;
   justify-content: space-between;

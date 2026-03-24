@@ -1,74 +1,101 @@
 <?php
 include 'header.php';
 
-// GIẢ LẬP LẤY ID TỪ URL (Ví dụ: chitiet.php?id=1)
-// Nếu có database, bạn sẽ viết câu SQL SELECT * FROM baiviet WHERE id = $id
+// Giả lập lấy ID từ URL
 $id = isset($_GET['id']) ? $_GET['id'] : 1;
 
-// Giả lập dữ liệu của bài viết cụ thể
 $article = [
-    'title' => 'Thông báo chương trình học bổng Ươm mầm tài năng Năm học 2025-2026',
-    'date' => 'Tháng 10 13, 2025',
+    'title' => 'Phát động chương trình hỗ trợ sinh viên "Tiếp Bước Giảng Đường" 2026',
+    'date' => '15/04/2026',
     'author' => 'admin',
-    'image' => 'Image/act-1.jpg', // Đảm bảo đường dẫn này đúng với thư mục của bạn
-    'category' => 'Học bổng',
+    'image' => 'Image/act-1.jpg', 
+    'category' => 'Tin tức',
     'content' => '
-        <p><strong>I. Lời giới thiệu Quỹ học bổng Ươm mầm tài năng</strong></p>
-        <p>Quỹ học bổng được thành lập với sứ mệnh hỗ trợ các sinh viên, học sinh có hoàn cảnh khó khăn nhưng sở hữu ý chí vươn lên mạnh mẽ trong học tập. Trải qua nhiều năm hoạt động, chúng tôi tự hào đã chắp cánh cho hàng ngàn ước mơ bước giảng đường.</p>
+        <p>Chào mừng năm học mới, chúng tôi chính thức công bố chương trình hỗ trợ tài chính đặc biệt dành riêng cho các bạn học sinh, sinh viên luôn nỗ lực vươn lên trong học tập nhưng đang gặp trở ngại về kinh tế.</p>
         
-        <h3>II. Đối tượng nhận học bổng</h3>
+        <h3>1. Mục tiêu chương trình</h3>
+        <p>Chương trình không chỉ dừng lại ở việc trao tặng các gói hỗ trợ tài chính, mà chúng tôi còn mong muốn được đồng hành cùng các em thông qua các buổi định hướng nghề nghiệp, đào tạo ngoại ngữ và phát triển kỹ năng mềm hoàn toàn miễn phí.</p>
+        
+        <h3>2. Điều kiện tham gia</h3>
         <ul>
-            <li>Sinh viên năm thứ nhất, thứ hai, thứ ba tại các trường Đại học đối tác của Quỹ.</li>
-            <li>Có hoàn cảnh gia đình khó khăn, thu nhập thấp.</li>
-            <li>Có thành tích học tập tốt (Điểm trung bình tích lũy từ 7.0/10 hoặc 3.0/4.0 trở lên).</li>
-            <li>Chưa nhận học bổng từ các tổ chức khác trong cùng năm học.</li>
+            <li>Sinh viên đang theo học hệ chính quy tại các trường Đại học, Cao đẳng trên toàn quốc.</li>
+            <li>Có sổ hộ nghèo, cận nghèo hoặc giấy xác nhận hoàn cảnh khó khăn có mộc đỏ của địa phương.</li>
+            <li>Điểm trung bình học kỳ gần nhất đạt từ Khá trở lên, điểm rèn luyện loại Tốt.</li>
         </ul>
 
-        <h3>III. Giá trị học bổng</h3>
-        <p>Mỗi suất học bổng bao gồm hỗ trợ tài chính trị giá tương đương <strong>học phí của học kỳ</strong> và cơ hội tham gia các khóa đào tạo kỹ năng mềm do Quỹ tổ chức miễn phí.</p>
-
-        <h3>IV. Cách thức và thời hạn đăng ký</h3>
-        <p>Nhà trường giới thiệu.</p>
+        <h3>3. Lộ trình triển khai</h3>
+        <p>Ban tổ chức sẽ bắt đầu nhận hồ sơ trực tuyến từ ngày 20/04/2026 đến hết ngày 30/05/2026. Quá trình phỏng vấn sẽ diễn ra vào đầu tháng 6 và kết quả dự kiến được công bố trước thềm năm học mới.</p>
+        <p>Chúng tôi hy vọng sự tiếp sức nhỏ bé này sẽ giúp các bạn vững bước hơn trên con đường chinh phục tri thức và xây dựng tương lai.</p>
     '
+];
+
+$recent_posts = [
+    [
+        'title' => 'Thông báo chương trình học bổng Ươm mầm tài năng Năm học 2025-2026',
+        'image' => 'Image/act-1.jpg', 
+        'date' => '13/10/2025',
+        'link' => 'detail.php?id=1'
+    ],
+    [
+        'title' => 'Tổng kết chuyến đi từ thiện "Áo ấm vùng cao" tại Hà Giang',
+        'image' => 'Image/act-1.jpg', 
+        'date' => '05/01/2026',
+        'link' => 'detail.php?id=2'
+    ],
+    [
+        'title' => 'Danh sách 50 sinh viên xuất sắc nhận hỗ trợ tháng 3/2026',
+        'image' => 'Image/act-1.jpg', 
+        'date' => '10/03/2026',
+        'link' => 'detail.php?id=3'
+    ]
 ];
 ?>
 
 <link rel="stylesheet" href="CSS/about.css">
 <link rel="stylesheet" href="CSS/detail.css">
 
-<section class="hero-section" style="min-height: 250px; padding: 60px 20px;">
-    <div class="hero-content" style="grid-template-columns: 1fr; text-align: center;">
-        <div class="hero-text">
-            <h1 class="hero-title" style="font-size: 2.5rem; text-align: center;">
-                <?php echo $article['title']; ?>
-            </h1>
-        </div>
-    </div>
-</section>
-
-<div class="back-button-container">
-    <a href="Notifications.php" class="btn-back">
-        <i class="fas fa-arrow-left"></i> Quay lại danh sách thông báo
-    </a>
-</div>
-
-<main class="article-container">
+<main class="container" style="margin-top: 140px; margin-bottom: 80px;">
     
-    <div class="article-meta" style="margin-top: 30px;">
-        <span class="badge"><?php echo $article['category']; ?></span>
-        <span><i class="far fa-calendar-alt"></i> <?php echo $article['date']; ?></span>
-        <span><i class="fas fa-user"></i> Đăng bởi: <?php echo $article['author']; ?></span>
+    <div class="blog-layout">
+        
+        <article class="article-content-wrapper">
+            
+            <img src="<?php echo $article['image']; ?>" alt="Ảnh bìa bài viết" class="article-main-image">
+
+            <div class="article-meta-inline">
+                <span><i class="fas fa-user"></i> <?php echo strtoupper($article['author']); ?></span>
+                <span class="divider">|</span>
+                <span><i class="far fa-calendar-alt"></i> <?php echo $article['date']; ?></span>
+            </div>
+
+            <h1 class="article-main-title"><?php echo $article['title']; ?></h1>
+
+            <div class="article-body">
+                <?php echo $article['content']; ?>
+            </div>
+            
+        </article>
+
+        <aside class="sidebar">
+            <div class="widget">
+                <h3 class="widget-title">Bài đăng mới</h3>
+                <div class="widget-content">
+                    <?php foreach ($recent_posts as $post): ?>
+                        <div class="sidebar-post">
+                            <a href="<?php echo $post['link']; ?>" class="sp-image">
+                                <img src="<?php echo $post['image']; ?>" alt="Thumbnail">
+                            </a>
+                            <div class="sp-content">
+                                <a href="<?php echo $post['link']; ?>" class="sp-title"><?php echo $post['title']; ?></a>
+                                <span class="sp-date"><?php echo $post['date']; ?></span>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </aside>
+
     </div>
-
-    <img src="<?php echo $article['image']; ?>" alt="Ảnh bìa bài viết" class="article-featured-image">
-
-    <div class="article-body">
-        <?php echo $article['content']; ?>
-    </div>
-
 </main>
 
-<?php
-// Nạp footer
-include 'footer.php';
-?>
+<?php include 'footer.php'; ?>
