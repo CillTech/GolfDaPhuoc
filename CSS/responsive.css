@@ -702,23 +702,26 @@
     font-size: 1.5rem;
   }
 
-  /* Footer responsive */
+  
   .footer_top {
-    flex-direction: column;
+    display: grid !important;
+    grid-template-columns: 1fr !important; 
     padding: 50px 20px 30px 20px;
     text-align: center;
+    gap: 30px !important;
   }
 
   .footer_top > :not(:first-child) {
-    border-inline-start: none;
+    border-left: none !important;
     border-top: 1px solid rgba(255, 255, 255, 0.15);
-    padding-left: 0;
+    padding-left: 0 !important;
     padding-top: 35px;
-    margin-top: 35px;
+    margin-top: 0;
   }
 
   .footer_top > li {
     padding: 0;
+    width: 100%; 
   }
 
   .footer-logo {
@@ -737,12 +740,12 @@
 
   .sub_footer p {
     text-align: center !important;
+    word-wrap: break-word; 
   }
 
   .footer_icon {
     justify-content: center !important;
   }
-
   /* Chatbot trigger */
   #chatbot-trigger {
     width: 100px !important;
@@ -1031,4 +1034,68 @@
 
 .floating-meo:hover {
   transform: scale(1.1);
+}
+/* =======================================================
+   BẢN VÁ LỖI RESPONSIVE (THÊM VÀO CUỐI FILE)
+   Fix lỗi tràn chữ và logo khổng lồ trên điện thoại
+   ======================================================= */
+
+@media (max-width: 1024px) {
+    /* 1. SỬA LẠI LOGO TRÊN ĐIỆN THOẠI CHO GỌN GÀNG */
+    .custom_header > .logo-banner-svg-wrapper {
+        position: absolute !important;
+        left: 65px !important; /* Né cái nút 3 gạch ra */
+        transform: none !important;
+        width: auto !important;
+        height: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+    
+    /* Ẩn cái khiên nền xanh đi trên mobile để không bị thòng xuống che nội dung */
+    .logo-banner-svg-wrapper .logo-banner-svg {
+        display: none !important; 
+    }
+
+    /* Ép logo nhỏ lại vừa vặn với thanh Header */
+    .logo-banner-svg-wrapper .logo-img {
+        height: 45px !important; 
+        transform: none !important;
+        padding: 0 !important;
+    }
+}
+
+@media (max-width: 768px) {
+    /* 2. ÉP NHỎ LẠI CÁC CHỮ THÔNG BÁO, HOẠT ĐỘNG KHỔNG LỒ */
+    .hero-section .hero-title,
+    .hero-section .hero-title1,
+    .scrapbook-title {
+        font-size: 2rem !important;
+        line-height: 1.4 !important;
+        word-wrap: break-word !important; /* Tự động xuống dòng gọn gàng */
+        padding: 0 10px;
+    }
+    
+    /* Thu gọn chiều cao của banner trên điện thoại */
+    .hero-section {
+        min-height: 180px !important;
+        padding: 60px 15px 30px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* 3. MÀN HÌNH CỰC NHỎ (Như điện thoại của bạn trong ảnh) */
+    .hero-section .hero-title,
+    .hero-section .hero-title1,
+    .scrapbook-title {
+        font-size: 1.6rem !important; /* Chữ nhỏ nhắn lại */
+    }
+    
+    .custom_header > .logo-banner-svg-wrapper {
+        left: 55px !important;
+    }
+    
+    .logo-banner-svg-wrapper .logo-img {
+        height: 35px !important;
+    }
 }

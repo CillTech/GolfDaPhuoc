@@ -17,11 +17,10 @@ $activities = [
 <link rel="stylesheet" href="CSS/about.css">
 <link rel="stylesheet" href="CSS/notifications.css">
 
-<section class="hero-section" style="min-height: 350px;">
+<section class="hero-section" style="min-height: 200px;">
     <div class="hero-content" style="grid-template-columns: 1fr;">
         <div class="hero-text" style="text-align: center;">
-            <h1 class="hero-title" style="text-align: center;">Thông báo</h1>
-            <p class="hero-subtitle" style="text-align: center;">Ghi lại những dấu ấn và hành trình chia sẻ yêu thương.</p>
+            <h1 class="hero-title1" style="text-align: center;">Thông Báo</h1>
         </div>
     </div>
 </section>

@@ -6,7 +6,7 @@ if (isset($baseHref)) {
     $assetBasePath = $trimmedBase === '' ? '' : $trimmedBase . '/';
 }
 
-// 2. Định nghĩa Menu thống nhất (Đã bỏ href_friendly)
+// 2. Định nghĩa Menu thống nhất
 $menuDefinitions = [
     [
         'label' => 'Giới thiệu',
@@ -68,55 +68,77 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             <svg class="logo-banner-svg" viewBox="0 0 180 180" preserveAspectRatio="none">
                 <path d="M 0,0 L 180,0 L 180,147 Q 180,162 165,163.5 L 15,178.5 Q 0,180 0,165 Z" fill="#6dcaec"/>
             </svg>
-            
             <img src="Image/logodaphuoc.png" alt="Logo" class="logo-img">
         </a>
 
-        <div class="menu-toggle" id="menuToggle" onclick="toggleMobileMenu()">
+        <div class="menu-toggle" id="menuToggle">
             <span></span><span></span><span></span>
         </div>
 
-        <nav class="menu" id="mobileMenu">
-            <ul class="nav-list">
-                <?php foreach ($menuDefinitions as $item): ?>
-                <li class="menu-item">
-                    <?php 
-                        $href = $item['href_php'];
-                        $isActive = ($currentPage === $href);
-                    ?>
-                    <a href="<?php echo htmlspecialchars($assetBasePath . $href); ?>" class="<?php echo $isActive ? 'active' : ''; ?>">
-                        <?php if (!empty($item['icon'])): ?>
-                        <i class="bi <?php echo htmlspecialchars($item['icon']); ?>"></i>
-                        <?php endif; ?>
-                        <span><?php echo htmlspecialchars($item['label']); ?></span>
-                    </a>
-
-                    <?php if (!empty($item['children'])): ?>
-                    <ul class="sub_menu">
-                        <?php foreach ($item['children'] as $child): ?>
-                        <li>
-                            <a href="<?php echo htmlspecialchars($assetBasePath . $child['href_php']); ?>">
-                                <?php echo htmlspecialchars($child['label']); ?>
-                            </a>
-                        </li>
-                        <?php endforeach; ?>
-                    </ul>
+        <ul class="menu nav-list" id="mobileMenu">
+            <?php foreach ($menuDefinitions as $item): ?>
+            <li class="menu-item">
+                <?php 
+                    $href = $item['href_php'];
+                    $isActive = ($currentPage === $href);
+                ?>
+                <a href="<?php echo htmlspecialchars($assetBasePath . $href); ?>" class="<?php echo $isActive ? 'active' : ''; ?>">
+                    <?php if (!empty($item['icon'])): ?>
+                    <i class="bi <?php echo htmlspecialchars($item['icon']); ?>"></i>
                     <?php endif; ?>
-                </li>
-                <?php endforeach; ?>
-                
-                <li class="menu-login-item is-hidden-desktop">
-                    <a href="<?php echo htmlspecialchars($assetBasePath . 'login/login.php'); ?>">
-                        <i class="bi bi-person"></i> <span>Đăng nhập</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+                    <span><?php echo htmlspecialchars($item['label']); ?></span>
+                </a>
+
+                <?php if (!empty($item['children'])): ?>
+                <ul class="sub_menu">
+                    <?php foreach ($item['children'] as $child): ?>
+                    <li>
+                        <a href="<?php echo htmlspecialchars($assetBasePath . $child['href_php']); ?>">
+                            <?php echo htmlspecialchars($child['label']); ?>
+                        </a>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+                <?php endif; ?>
+            </li>
+            <?php endforeach; ?>
+            
+            <li class="menu-login-item is-hidden-desktop">
+                <a href="<?php echo htmlspecialchars($assetBasePath . 'login/login.php'); ?>">
+                    <i class="bi bi-person"></i> <span>Đăng nhập</span>
+                </a>
+            </li>
+        </ul>
 
         <div class="login">
             <a href="<?php echo htmlspecialchars($assetBasePath . 'login/login.php'); ?>" class="bi bi-person" title="Đăng nhập"></a>
         </div>
     </header>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            if (menuToggle && mobileMenu) {
+                // Mở/Đóng menu khi bấm vào nút 3 gạch
+                menuToggle.addEventListener('click', function(e) {
+                    e.stopPropagation(); 
+                    this.classList.toggle('active');
+                    mobileMenu.classList.toggle('active');
+                });
+
+                // Tự động đóng menu khi bấm ra ngoài khoảng trống
+                document.addEventListener('click', function(event) {
+                    if (!mobileMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                        mobileMenu.classList.remove('active');
+                        menuToggle.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
+
     <script src="<?php echo htmlspecialchars($assetBasePath . 'JS/header.js'); ?>"></script>
+    
     <div style="padding-top: 80px;">
