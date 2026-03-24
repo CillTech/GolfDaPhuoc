@@ -3,17 +3,17 @@ include 'header.php';
 
 $milestones = [
     [
-        'title' => 'Thành lập Quỹ Học Bổng Đồng Hành',
+        'title' => 'Thành lập Quỹ Học Bổng Ươm mầm tài năng',
         'desc' => 'Quỹ được thành lập với mục tiêu hỗ trợ học sinh, sinh viên có hoàn cảnh khó khăn.',
         'time' => 'Tháng 9, 2020'
     ],
     [
-        'title' => 'Chương trình Học Bổng Đồng Hành lần 1',
+        'title' => 'Chương trình Học Bổng Ươm mầm tài năng lần 1',
         'desc' => 'Trao tặng 100 suất học bổng cho học sinh, sinh viên trên toàn quốc.',
         'time' => 'Tháng 12, 2020'
     ],
     [
-        'title' => 'Mở rộng chương trình Học Bổng Đồng Hành',
+        'title' => 'Mở rộng chương trình Học Bổng Ươm mầm tài năng',
         'desc' => 'Tăng số lượng học bổng lên 200 suất và mở rộng đối tượng nhận học bổng.',
         'time' => 'Tháng 6, 2021'
     ],

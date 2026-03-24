@@ -25,11 +25,10 @@ $article = [
         </ul>
 
         <h3>III. Giá trị học bổng</h3>
-        <p>Mỗi suất học bổng bao gồm hỗ trợ tài chính trị giá <strong>4.500.000 VNĐ/học kỳ</strong> và cơ hội tham gia các khóa đào tạo kỹ năng mềm do Quỹ tổ chức miễn phí.</p>
+        <p>Mỗi suất học bổng bao gồm hỗ trợ tài chính trị giá tương đương <strong>học phí của học kỳ</strong> và cơ hội tham gia các khóa đào tạo kỹ năng mềm do Quỹ tổ chức miễn phí.</p>
 
         <h3>IV. Cách thức và thời hạn đăng ký</h3>
-        <p>Hồ sơ vui lòng nộp trực tuyến qua cổng thông tin của Quỹ hoặc nộp trực tiếp tại văn phòng Đoàn Thanh Niên - Hội Sinh Viên của trường.</p>
-        <p><strong>Thời hạn cuối cùng nhận hồ sơ:</strong> 23:59 ngày 30/10/2025.</p>
+        <p>Nhà trường giới thiệu.</p>
     '
 ];
 ?>
