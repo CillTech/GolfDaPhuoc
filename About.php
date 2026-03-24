@@ -34,7 +34,7 @@ include 'header.php';
             <ul>
                 <?php 
                 // Lấy nội dung mảng từ file
-                $principles = include 'text\\principle.php'; 
+                $principles = include 'text/principle.php'; 
                 
                 // In ra từng dòng
                 foreach ($principles as $item) {
@@ -48,7 +48,7 @@ include 'header.php';
             <ul>
                 <?php 
                 // Lấy nội dung mảng từ file
-                $scope = include 'text\\scope.php'; 
+                $scope = include 'text/scope.php'; 
                 
                 // In ra từng dòng
                 foreach ($scope as $item) {
@@ -65,7 +65,7 @@ include 'header.php';
         <div class="values-grid">
             <?php 
             // 1. Gọi dữ liệu từ file
-            $target = include 'text\\target.php'; 
+            $target = include 'text/target.php'; 
             
             foreach ($target as $giai_doan => $danh_sach) { 
             ?>
@@ -112,7 +112,7 @@ include 'header.php';
             <ul>
                 <?php 
                 // Lấy nội dung mảng từ file
-                $method = include 'text\\method.php'; 
+                $method = include 'text/method.php'; 
                 
                 // In ra từng dòng
                 foreach ($method as $item) {
