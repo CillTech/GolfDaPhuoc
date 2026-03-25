@@ -1,48 +1,16 @@
-<?php include 'header.php'; ?>
+<?php 
+include 'header.php'; 
+include 'config.php';
 
-<?php
-$blog_posts = [
-    [
-        'title' => 'Cảm ơn vì đã không bỏ cuộc',
-        'author' => 'Minh Anh',
-        'role' => 'Sinh viên',
-        'image' => 'Image/act-1.jpg',
-        'content' => 'Ngày nhận được tin nhắn từ Quỹ, mình đã khóc nức nở. Không phải vì số tiền, mà vì biết rằng mình không hề đơn độc trên hành trình này. Những lời động viên và sự giúp đỡ vô điều kiện của các anh chị đã tiếp thêm cho mình động lực to lớn để bước tiếp...',
-        'date' => '22/03/2026',
-        'rotation' => '-3deg',
-        'link' => 'detail.php?id=1' // Thêm link trỏ về bài viết chi tiết
-    ],
-    [
-        'title' => 'Thư gửi các em khóa sau',
-        'author' => 'Chú Quang',
-        'role' => 'Ban Điều Hành',
-        'image' => 'Image/act-1.jpg',
-        'content' => 'Đừng bao giờ để hoàn cảnh định nghĩa con người bạn. Các em có tiềm năng lớn hơn các em tưởng rất nhiều. Cuộc sống có thể vùi dập ta bằng những thử thách khắc nghiệt, nhưng quyền lựa chọn đứng lên luôn nằm trong tay các em. Hãy cứ vững tin nhé!',
-        'date' => '18/03/2026',
-        'rotation' => '2deg',
-        'link' => 'detail.php?id=2'
-    ],
-    [
-        'title' => 'Góc nhỏ bình yên',
-        'author' => 'Lê Hải',
-        'role' => 'Sinh viên',
-        'image' => 'Image/act-1.jpg',
-        'content' => 'Mỗi buổi chiều ngồi tại văn phòng Quỹ, mình cảm nhận được một nguồn năng lượng rất lạ. Đó là sự thấu hiểu và sẻ chia không lời. Những mệt mỏi sau giờ học dường như tan biến khi được cùng mọi người gói từng món quà gửi lên vùng cao.',
-        'date' => '10/03/2026',
-        'rotation' => '-2deg',
-        'link' => 'detail.php?id=3'
-    ],
-    [
-        'title' => 'Hạnh phúc là sự sẻ chia',
-        'author' => 'Cô Thảo',
-        'role' => 'Ban Điều Hành',
-        'image' => 'Image/act-1.jpg',
-        'content' => 'Có những giá trị không nằm ở những con số, mà nằm ở sự chuyển biến trong tư duy và nụ cười của các em mỗi ngày lên lớp. Chúng tôi làm việc bằng cả trái tim, chỉ mong thấy các em trưởng thành và trở thành những người tử tế.',
-        'date' => '05/03/2026',
-        'rotation' => '4deg',
-        'link' => 'detail.php?id=4'
-    ]
-];
+// 1. Lấy dữ liệu từ tab blog
+$api_url = URL_BLOG;
+$response = @file_get_contents($api_url);
+$blog_posts = json_decode($response, true);
+
+if (!$blog_posts) $blog_posts = [];
+
+// Đảo ngược mảng để bài mới nhất hiện lên đầu
+$blog_posts = array_reverse($blog_posts);
 ?>
 
 <link rel="stylesheet" href="CSS/about.css">
@@ -59,20 +27,27 @@ $blog_posts = [
     </header>
 
     <section class="gallery-wall">
-        <?php foreach ($blog_posts as $index => $post): ?>
-            <div class="polaroid-wrapper" style="--rotation: <?php echo $post['rotation']; ?>; animation-delay: <?php echo 0.3 + ($index * 0.15); ?>s;">
+        <?php foreach ($blog_posts as $index => $post): 
+            // ĐƯA HÀM RAND VÀO ĐÂY: Mỗi vòng lặp sẽ tạo một số ngẫu nhiên mới
+            // Ngẫu nhiên từ -3 đến 3 độ để nghiêng nhẹ nhàng
+            $random_rotation = rand(-3, 3) . 'deg';
+        ?>
+            <div class="polaroid-wrapper" style="--rotation: <?php echo $random_rotation; ?>; animation-delay: <?php echo 0.3 + ($index * 0.15); ?>s;">
                 <article class="polaroid-card">
                     <div class="polaroid-image">
                         <img src="<?php echo $post['image']; ?>" alt="Kỷ niệm">
-                        <div class="polaroid-label <?php echo ($post['role'] == 'Sinh viên') ? 'label-stu' : 'label-adm'; ?>">
+                        <?php 
+                            $label_class = ($post['role'] == 'Sinh viên') ? 'label-stu' : 'label-adm';
+                        ?>
+                        <div class="polaroid-label <?php echo $label_class; ?>">
                             <?php echo $post['role']; ?>
                         </div>
                     </div>
                     
                     <div class="polaroid-body">
                         <h2 class="polaroid-title"><?php echo $post['title']; ?></h2>
-                        <p class="polaroid-text">“<?php echo $post['content']; ?>”</p>
-                        <a href="<?php echo $post['link']; ?>" class="read-more-link">Xem thêm...</a>
+                        <p class="polaroid-text">“<?php echo $post['excerpt']; ?>”</p>
+                        <a href="detail_blog.php?id=<?php echo $post['id']; ?>" class="read-more-link">Xem thêm...</a>
                         
                         <div class="polaroid-footer">
                             <span class="polaroid-author">— <?php echo $post['author']; ?></span>

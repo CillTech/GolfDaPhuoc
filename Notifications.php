@@ -3,7 +3,7 @@ include 'header.php';
 include 'config.php';
 
 // Thay bằng URL API của bạn từ SheetDB
-$api_url = BASE_URL;
+$api_url = URL_NOTIFICATIONS;
 $response = file_get_contents($api_url);
 $activities = json_decode($response, true);
 if ($activities) {
