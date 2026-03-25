@@ -50,7 +50,7 @@ $blog_posts = [
 
 <main class="scrapbook-container">
     <header class="scrapbook-header">
-        <h1 class="scrapbook-title">Blog Đồng Hành</h1>
+        <h1 class="scrapbook-title">Blog</h1>
         <p class="scrapbook-desc">Nơi những tâm hồn đồng điệu gửi gắm tâm tình</p>
         
         <div class="cta-wrapper">
