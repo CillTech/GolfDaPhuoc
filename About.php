@@ -23,8 +23,8 @@ include 'header.php';
     <section class="about-section introduce-section">
         <h2 class="section-title">Giới thiệu về Quỹ</h2>
         <div class="section-content">
-            <p>Quỹ học bổng được thành lập với sứ mệnh hỗ trợ các sinh viên, học sinh có hoàn cảnh khó khăn nhưng sở hữu ý chí vươn lên mạnh mẽ trong học tập. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <p>Trải qua nhiều năm hoạt động, chúng tôi tự hào đã chắp cánh cho hàng ngàn ước mơ bước giảng đường. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Quỹ học bổng được thành lập với sứ mệnh hỗ trợ các sinh viên, học sinh có hoàn cảnh khó khăn nhưng sở hữu ý chí vươn lên mạnh mẽ trong học tập.</p>
+            <p>Trải qua nhiều năm hoạt động, chúng tôi tự hào đã chắp cánh cho hàng ngàn ước mơ bước giảng đường.</p>
         </div>
     </section>
 

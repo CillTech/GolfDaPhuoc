@@ -3,22 +3,6 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Nếu đã đăng nhập (bất kỳ vai trò nào) mà quay lại trang chủ index
-// thì tự động đăng xuất để quay về giao diện khách
-// if (!empty($_SESSION['user_id'])) {
-//     $_SESSION = [];
-//     if (ini_get("session.use_cookies")) {
-//         $params = session_get_cookie_params();
-//         setcookie(session_name(), '', time() - 42000,
-//             $params["path"], $params["domain"],
-//             $params["secure"], $params["httponly"]
-//         );
-//     }
-//     session_destroy();
-//     header("Location: trang-chu");
-//     exit;
-// }
-
 include "header.php";
 ?>
 
@@ -34,11 +18,11 @@ include "header.php";
                 <h1 class="hero-title">CLB Golf Đa Phước</h1>
                 <p class="hero-subtitle">Đồng hành cùng thế hệ trẻ Đà Nẵng</p>
                 <div class="hero-buttons">
-                    <a href="Form_parent.php" class="btn btn-primary">
+                    <a href="Notifications.php" class="btn btn-primary">
                         <i class="fas fa-search"></i>
-                        Tìm hiểu
+                        Thông báo
                     </a>
-                    <a href="Form_tutor.php" class="btn btn-secondary">
+                    <a href="Sponsorship.php" class="btn btn-secondary">
                         <i class="fas fa-chalkboard-teacher"></i>
                         Tài trợ
                     </a>
