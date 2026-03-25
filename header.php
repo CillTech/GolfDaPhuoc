@@ -64,7 +64,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
 <body>
     <header class="custom_header">
-        <a href="index.php" class="logo-banner-svg-wrapper">
+        <a href="index.php" class="logo-banner-svg-wrapper desktop-logo">
             <svg class="logo-banner-svg" viewBox="0 0 180 180" preserveAspectRatio="none">
                 <path d="M 0,0 L 180,0 L 180,147 Q 180,162 165,163.5 L 15,178.5 Q 0,180 0,165 Z" fill="#6dcaec"/>
             </svg>
@@ -74,8 +74,14 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <div class="menu-toggle" id="menuToggle">
             <span></span><span></span><span></span>
         </div>
-
+        
         <ul class="menu nav-list" id="mobileMenu">
+            <li class="mobile-menu-logo-wrapper">
+                <a href="index.php" class="mobile-menu-logo">
+                    <img src="Image/LOGO.png" alt="Logo Đa Phước">
+                </a>
+            </li>
+
             <?php foreach ($menuDefinitions as $item): ?>
             <li class="menu-item">
                 <?php 
@@ -102,17 +108,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 <?php endif; ?>
             </li>
             <?php endforeach; ?>
-            
-            <li class="menu-login-item is-hidden-desktop">
-                <a href="<?php echo htmlspecialchars($assetBasePath . 'login/login.php'); ?>">
-                    <i class="bi bi-person"></i> <span>Đăng nhập</span>
-                </a>
-            </li>
         </ul>
-
-        <div class="login">
-            <a href="<?php echo htmlspecialchars($assetBasePath . 'login/login.php'); ?>" class="bi bi-person" title="Đăng nhập"></a>
-        </div>
     </header>
 
     <script>

@@ -1,1101 +1,287 @@
 /* ============================================================================
-   RESPONSIVE DESIGN - RESPONSIVE.CSS
-   File CSS xử lý responsive cho toàn bộ website
-   Bao gồm: Mobile menu, breakpoints, và các điều chỉnh layout theo màn hình
+   RESPONSIVE DESIGN - TỐI ƯU HÓA
    ============================================================================ */
 
-/* ============================================================================
-   HAMBURGER MENU BUTTON
-   Nút menu hamburger cho mobile
-   ============================================================================ */
-
+/* 1. HAMBURGER MENU BUTTON */
 .menu-toggle {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  padding: 5px;
-  gap: 5px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 5px;
-  width: 40px;
-  height: 40px;
-  justify-content: center;
-  align-items: center;
-  z-index: 1001;
-  position: relative;
-  pointer-events: auto;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+    gap: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    z-index: 1002;
+    position: relative;
+    user-select: none;
 }
 
 .menu-toggle span {
-  width: 25px;
-  height: 3px;
-  background: white;
-  border-radius: 3px;
-  transition: all 0.3s ease;
+    width: 25px;
+    height: 3px;
+    background: white;
+    border-radius: 3px;
+    transition: all 0.3s ease;
 }
 
-/* Animation khi menu toggle active (chuyển thành X) */
-.menu-toggle.active span:nth-child(1) {
-  transform: rotate(45deg) translate(8px, 8px);
-}
+.menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+.menu-toggle.active span:nth-child(2) { opacity: 0; }
+.menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
 
-.menu-toggle.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.menu-toggle.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(7px, -7px);
-}
-
-/* ============================================================================
-   BREAKPOINT 1: TABLET & SMALL LAPTOP (1300px -> 1025px)
-   Điều chỉnh menu để phù hợp với màn hình tablet
-   ============================================================================ */
-
-@media (max-width: 1300px) and (min-width: 1025px) {
-  .menu {
-    display: flex;
-    flex-wrap: nowrap;
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-    width: auto;
-    margin: 0;
-    padding: 0;
-  }
-
-  .menu > li {
-    padding: 0;
-  }
-
-  .menu > li > a {
-    font-size: 16px;
-    padding: 10px 10px;
-    white-space: nowrap;
-  }
-}
-
-/* ============================================================================
-   BREAKPOINT 2: TABLET (1024px trở xuống)
-   Chuyển sang mobile menu, ẩn login button, hiển thị menu toggle
-   ============================================================================ */
-
+/* 2. TABLET & LAPTOP NHỎ (Max-width: 1024px) */
 @media (max-width: 1024px) {
-  /* Header adjustments */
-  .custom_header {
-    padding: 0 20px;
-    height: 70px;
-    justify-content: center !important;
-    align-items: center !important;
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    z-index: 1000 !important;
-  }
-
-  .custom_header > .logo {
-    position: absolute !important;
-    left: 70px !important;
-    right: auto !important;
-    transform: none !important;
-    flex-shrink: 0;
-    max-width: calc(100% - 90px) !important;
-    margin: 0 !important;
-    display: flex !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    z-index: 2;
-    pointer-events: auto;
-  }
-
-  .custom_header > .logo .logo-link {
-    display: flex !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    margin: 0 !important;
-    max-width: 100%;
-    overflow: hidden;
-  }
-
-  .custom_header > .logo img {
-    height: 50px;
-  }
-
-  .custom_header > .logo .logo-text {
-    font-size: 20px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  /* Menu toggle button */
-  .menu-toggle {
-    display: flex !important;
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1002;
-    pointer-events: auto;
-  }
-
-  /* Ẩn login button, hiển thị trong menu */
-  .login {
-    display: none;
-  }
-
-  .menu-login-item__link span {
-    display: inline-block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    font-size: 20px !important;
-    font-weight: 600 !important;
-    color: white !important;
-  }
-
-  .menu-login-item__link {
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-  }
-
-  /* Mobile menu - Menu dạng slide từ trái */
-  .menu {
-    position: fixed;
-    top: 70px;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: calc(100vh - 70px);
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    backdrop-filter: blur(10px);
-    flex-direction: column;
-    padding: 15px 20px 30px 20px;
-    margin: 0 !important;
-    box-sizing: border-box;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow-y: auto;
-    z-index: 1000;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    justify-content: flex-start;
-    align-items: flex-start;
-    transform: translateX(-100%);
-    visibility: hidden;
-    pointer-events: none;
-  }
-
-  .menu.active {
-    transform: translateX(0) !important;
-    visibility: visible !important;
-    pointer-events: auto !important;
-    display: flex !important;
-  }
-
-  .menu > li {
-    padding: 18px 0;
-    width: 100%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  }
-
-  .menu > li:last-child {
-    border-bottom: none;
-  }
-
-  .menu > li > a {
-    font-size: 20px;
-    font-weight: 600;
-    padding: 12px 15px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: white;
-    transition: all 0.3s ease;
-    border-radius: 8px;
-    position: relative;
-  }
-
-  .menu > li > a i {
-    display: inline-block;
-    font-size: 22px;
-    flex-shrink: 0;
-    width: 24px;
-    text-align: center;
-  }
-
-  .menu > li > a span {
-    flex: 1;
-  }
-
-  .menu > li > a:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateX(5px);
-  }
-
-  .menu > li > a.active {
-    font-weight: 700;
-    color: white;
-  }
-
-  .menu > li > a.active::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: white;
-    border-radius: 0;
-    box-shadow: none;
-    animation: none;
-  }
-
-  /* Sub menu trong mobile */
-  .sub_menu {
-    position: static;
-    display: none;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.08);
-    padding: 15px;
-    margin-top: 10px;
-    border-radius: 8px;
-    animation: slideDown 0.3s ease;
-  }
-
-  @keyframes slideDown {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
+    /* --- HEADER & LOGO FIX --- */
+    .custom_header {
+        height: 70px;
+        padding: 0 20px;
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+
+    .hero-section {
+      min-height: 300px !important;
     }
-  }
 
-  .menu > li:hover .sub_menu,
-  .menu > li.active .sub_menu {
-    display: block;
-  }
+    .floating-card { display: none; }
 
-  .sub_menu li {
-    padding: 10px 0;
-  }
-
-  .sub_menu li a {
-    font-size: 15px;
-    padding: 8px 15px;
-    display: block;
-    color: rgba(255, 255, 255, 0.9);
-    transition: all 0.3s ease;
-    border-radius: 6px;
-  }
-
-  .sub_menu li a:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateX(8px);
-  }
-
-  /* Content padding adjustments */
-  .Introduce_contents {
-    padding: 0 var(--page-padding) 50px;
-    padding-top: 40px !important;
-  }
-
-  .recruitment-page {
-    padding-top: 0px !important;
-  }
-
-  .faq-page {
-    padding-top: 0px !important;
-  }
-
-  .Introduce_contents.tutor-page {
-    padding-top: 30px !important;
-  }
-
-  body > div[style*="padding-top"] {
-    padding-top: 0px !important;
-  }
-
-  /* Hero section adjustments */
-  .introduce-hero {
-    padding: 20px;
-    grid-template-columns: 1fr;
-    text-align: center;
-    margin-top: 0 !important;
-  }
-
-  .introduce-hero-text {
-    align-items: center;
-  }
-
-  .introduce-stats {
-    justify-content: center;
-  }
-
-  .introduce-grid {
-    gap: 20px;
-  }
-
-  .hero-content {
-    grid-template-columns: 1fr;
-    gap: 40px;
-    text-align: center;
-  }
-
-  .hero-title {
-    font-size: 2.5rem;
-  }
-
-  .hero-stats {
-    flex-direction: row;
-    justify-content: center;
-    gap: 20px;
-  }
-
-  .stat-item {
-    padding: 20px;
-  }
-
-  .stat-number {
-    font-size: 2rem;
-  }
-}
-
-/* ============================================================================
-   BREAKPOINT 3: MOBILE (768px trở xuống)
-   Tối ưu cho màn hình mobile nhỏ
-   ============================================================================ */
-
-@media (max-width: 768px) {
-  /* Header - Giữ nguyên như 1024px */
-  .custom_header {
-    padding: 0 20px;
-    height: 70px;
-    justify-content: center !important;
-    align-items: center !important;
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    z-index: 1000 !important;
-  }
-
-  .custom_header > .logo {
-    position: absolute !important;
-    left: 70px !important;
-    right: auto !important;
-    transform: none !important;
-    flex-shrink: 0;
-    max-width: calc(100% - 90px) !important;
-    margin: 0 !important;
-    display: flex !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    z-index: 2;
-    pointer-events: auto;
-  }
-
-  .custom_header > .logo .logo-link {
-    display: flex !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    margin: 0 !important;
-    max-width: 100%;
-    overflow: hidden;
-  }
-
-  .custom_header > .logo img {
-    height: 50px;
-  }
-
-  .custom_header > .logo .logo-text {
-    font-size: 20px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .menu-toggle {
-    display: flex;
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1002;
-    pointer-events: auto;
-  }
-
-  .login {
-    display: none;
-  }
-
-  .menu-login-item__link span {
-    display: inline-block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    font-size: 20px !important;
-    font-weight: 600 !important;
-    color: white !important;
-  }
-
-  .menu-login-item__link {
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-  }
-
-  /* Menu - Giữ nguyên như 1024px */
-  .menu {
-    position: fixed;
-    top: 70px;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: calc(100vh - 70px);
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    backdrop-filter: blur(10px);
-    flex-direction: column;
-    padding: 15px 20px 30px 20px;
-    margin: 0 !important;
-    box-sizing: border-box;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow-y: auto;
-    z-index: 1000;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    justify-content: flex-start;
-    align-items: flex-start;
-    transform: translateX(-100%);
-    visibility: hidden;
-    pointer-events: none;
-  }
-
-  .menu.active {
-    transform: translateX(0) !important;
-    visibility: visible !important;
-    pointer-events: auto !important;
-    display: flex !important;
-  }
-
-  .menu > li {
-    padding: 18px 0;
-    width: 100%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  }
-
-  .menu > li:last-child {
-    border-bottom: none;
-  }
-
-  .menu > li > a {
-    font-size: 20px;
-    font-weight: 600;
-    padding: 12px 15px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: white;
-    transition: all 0.3s ease;
-    border-radius: 8px;
-    position: relative;
-  }
-
-  .menu > li > a i {
-    display: inline-block;
-    font-size: 22px;
-    flex-shrink: 0;
-    width: 24px;
-    text-align: center;
-  }
-
-  .menu > li > a span {
-    flex: 1;
-  }
-
-  .menu > li > a:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateX(5px);
-  }
-
-  .menu > li > a.active {
-    font-weight: 700;
-    color: white;
-  }
-
-  .menu > li > a.active::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: white;
-    border-radius: 0;
-    box-shadow: none;
-    animation: none;
-  }
-
-  .sub_menu {
-    position: static;
-    display: none;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.08);
-    padding: 15px;
-    margin-top: 10px;
-    border-radius: 8px;
-    animation: slideDown 0.3s ease;
-  }
-
-  .menu > li:hover .sub_menu,
-  .menu > li.active .sub_menu {
-    display: block;
-  }
-
-  .sub_menu li {
-    padding: 10px 0;
-  }
-
-  .sub_menu li a {
-    font-size: 15px;
-    padding: 8px 15px;
-    display: block;
-    color: rgba(255, 255, 255, 0.9);
-    transition: all 0.3s ease;
-    border-radius: 6px;
-  }
-
-  .sub_menu li a:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateX(8px);
-  }
-
-  /* Hero section responsive */
-  .hero-section {
-    padding: 80px 20px 60px 20px;
-    min-height: 500px;
-  }
-
-  .hero-content {
-    gap: 30px;
-  }
-
-  .hero-title {
-    font-size: 2.2rem;
-    line-height: 1.3;
-  }
-
-  .hero-subtitle {
-    font-size: 1.1rem;
-    margin-bottom: 30px;
-  }
-
-  .hero-buttons {
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-  }
-
-  #Banner {
-    padding: 0 var(--page-padding) 30px var(--page-padding);
-  }
-
-  .btn {
-    width: 100%;
-    max-width: 280px;
-    padding: 14px 28px;
-    font-size: 16px;
-  }
-
-  .hero-stats {
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 40px;
-  }
-
-  .stat-item {
-    padding: 20px;
-    width: 100%;
-  }
-
-  .stat-number {
-    font-size: 2rem;
-  }
-
-  .stat-label {
-    font-size: 0.9rem;
-  }
-
-  /* Content padding */
-  .Introduce_contents {
-    padding: 0 var(--page-padding) 50px;
-    padding-top: 50px !important;
-  }
-
-  .recruitment-page {
-    padding-top: 50px !important;
-  }
-
-  .faq-page {
-    padding-top: 50px !important;
-  }
-
-  .Introduce_contents.tutor-page {
-    padding-top: 20px !important;
-  }
-
-  body > div[style*="padding-top"] {
-    padding-top: 80px !important;
-  }
-
-  /* Introduce sections */
-  .introduce-hero {
-    padding: 0px;
-    grid-template-columns: 1fr;
-    text-align: center;
-    margin-top: 0 !important;
-  }
-
-  .introduce-stats {
-    gap: 12px;
-    justify-content: center;
-  }
-
-  .introduce-stat {
-    flex: 1 1 45%;
-    min-width: unset;
-  }
-
-  .introduce-card {
-    padding: 20px;
-  }
-
-  .introduce-columns {
-    grid-template-columns: 1fr;
-  }
-
-  .introduce-cta {
-    padding: 30px 24px;
-  }
-
-  .tutor-card {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .tutor-card img {
-    width: 100%;
-    height: 220px;
-  }
-
-  .floating-card {
-    width: 60px;
-    height: 60px;
-  }
-
-  .floating-card i {
-    font-size: 1.5rem;
-  }
-
-  
-  .footer_top {
-    display: grid !important;
-    grid-template-columns: 1fr !important; 
-    padding: 50px 20px 30px 20px;
-    text-align: center;
-    gap: 30px !important;
-  }
-
-  .footer_top > :not(:first-child) {
-    border-left: none !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    padding-left: 0 !important;
-    padding-top: 35px;
-    margin-top: 0;
-  }
-
-  .footer_top > li {
-    padding: 0;
-    width: 100%; 
-  }
-
-  .footer-logo {
-    justify-content: center !important;
-    margin: 0 auto 15px auto !important;
-  }
-
-  .sub_footer {
-    align-items: center !important;
-    text-align: center !important;
-  }
-
-  .sub_footer > li {
-    justify-content: center !important;
-  }
-
-  .sub_footer p {
-    text-align: center !important;
-    word-wrap: break-word; 
-  }
-
-  .footer_icon {
-    justify-content: center !important;
-  }
-  /* Chatbot trigger */
-  #chatbot-trigger {
-    width: 100px !important;
-    max-width: 100px !important;
-    display: inline-block;
-  }
-
-  .floating-meo {
-    width: 100px !important;
-    max-width: 100px !important;
-    height: 120px !important;
-    bottom: 3px;
-    right: 3px;
-    object-fit: contain !important;
-  }
-}
-
-/* ============================================================================
-   BREAKPOINT 4: SMALL MOBILE (480px trở xuống)
-   Tối ưu cho màn hình mobile rất nhỏ
-   ============================================================================ */
-
-@media (max-width: 480px) {
-  /* Header - Giảm kích thước */
-  .custom_header {
-    padding: 0 15px;
-    height: 65px;
-    justify-content: center !important;
-    align-items: center !important;
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    z-index: 1000 !important;
-  }
-
-  .custom_header > .logo {
-    position: absolute !important;
-    left: 68px !important;
-    right: auto !important;
-    transform: none !important;
-    margin: 0 !important;
-    display: flex !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    z-index: 2;
-    max-width: calc(100% - 88px) !important;
-    pointer-events: auto;
-  }
-
-  .custom_header > .logo .logo-link {
-    display: flex !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    margin: 0 !important;
-    max-width: 100%;
-    overflow: hidden;
-  }
-
-  .custom_header > .logo img {
-    height: 45px;
-  }
-
-  /* Menu toggle - Nhỏ hơn */
-  .menu-toggle {
-    width: 38px;
-    height: 38px;
-    z-index: 1002;
-    pointer-events: auto;
-  }
-
-  .menu-toggle span {
-    width: 22px;
-  }
-
-  .menu-login-item__link span {
-    display: inline-block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    font-size: 18px !important;
-    font-weight: 600 !important;
-    color: white !important;
-  }
-
-  .menu-login-item__link {
-    display: flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-  }
-
-  /* Menu - Điều chỉnh cho màn hình nhỏ */
-  .menu {
-    top: 65px;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: calc(100vh - 65px);
-    padding: 25px 15px;
-    margin: 0 !important;
-    box-sizing: border-box;
-  }
-
-  .menu > li {
-    padding: 15px 0;
-  }
-
-  .menu > li > a {
-    font-size: 18px;
-    padding: 10px 12px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    position: relative;
-  }
-
-  .menu > li > a i {
-    display: inline-block;
-    font-size: 20px;
-    flex-shrink: 0;
-    width: 22px;
-    text-align: center;
-  }
-
-  .menu > li > a span {
-    flex: 1;
-  }
-
-  .menu > li > a.active {
-    font-weight: 700;
-    color: white;
-  }
-
-  .menu > li > a.active::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: white;
-    border-radius: 0;
-    box-shadow: none;
-    animation: none;
-  }
-
-  .sub_menu {
-    padding: 12px;
-    margin-top: 8px;
-  }
-
-  .sub_menu li {
-    padding: 8px 0;
-  }
-
-  .sub_menu li a {
-    font-size: 14px;
-    padding: 6px 12px;
-  }
-
-  /* Hero section - Nhỏ hơn */
-  .hero-title {
-    font-size: 1.8rem;
-  }
-
-  .hero-content {
-    text-align: center;
-    padding: 40px 15px;
-  }
-
-  .btn {
-    padding: 12px 24px;
-    font-size: 15px;
-  }
-
-  .stat-number {
-    font-size: 1.5rem;
-  }
-
-  .stat-label {
-    font-size: 0.85rem;
-  }
-
-  /* Banner responsive */
-  #Banner {
-    margin-top: 32.5px;
-  }
-
-  #Banner img {
-    height: auto;
-    max-height: 280px;
-  }
-
-  .hero-subtitle {
-    font-size: 1rem;
-  }
-
-  /* Ẩn floating cards trên màn hình rất nhỏ */
-  .floating-card {
-    display: none;
-  }
-
-  /* Content padding */
-  .Introduce_contents {
-    padding: 0 var(--page-padding) 40px;
-    padding-top: 50px !important;
-  }
-
-  .recruitment-page {
-    padding-top: 25px !important;
-  }
-
-  .faq-page {
-    padding-top: 25px !important;
-  }
-
-  .Introduce_contents.tutor-page {
-    padding-top: 15px !important;
-  }
-
-  body > div[style*="padding-top"] {
-    padding-top: 55px !important;
-  }
-
-  /* Introduce sections */
-  .introduce-hero {
-    padding: 20px;
-    grid-template-columns: 1fr;
-    text-align: center;
-    margin-top: 0 !important;
-  }
-
-  .introduce-stat {
-    flex: 1 1 100%;
-  }
-
-  .introduce-hero-text {
-    align-items: center;
-  }
-
-  .introduce-card {
-    padding: 18px;
-  }
-
-  .introduce-cta {
-    padding: 28px 20px;
-  }
-
-  .tutor-card {
-    padding: 14px;
-  }
-
-  /* Chatbot trigger */
-  #chatbot-trigger {
-    width: 100px !important;
-    max-width: 100px !important;
-    display: inline-block;
-  }
-
-  .floating-meo {
-    width: 100px !important;
-    max-width: 100px !important;
-    height: 120px !important;
-    bottom: 5px;
-    right: 5px;
-    object-fit: contain !important;
-  }
-}
-
-/* ============================================================================
-   FLOATING MEO IMAGE
-   Hình ảnh Mèo nổi để trigger chatbot
-   ============================================================================ */
-
-.floating-meo {
-  position: fixed;
-  bottom: 5px;
-  right: 5px;
-  width: 150px;
-  max-width: 150px;
-  height: auto;
-  z-index: 1000;
-  transition: transform 0.3s ease;
-  object-fit: contain;
-}
-
-.floating-meo:hover {
-  transform: scale(1.1);
-}
-/* =======================================================
-   BẢN VÁ LỖI RESPONSIVE (THÊM VÀO CUỐI FILE)
-   Fix lỗi tràn chữ và logo khổng lồ trên điện thoại
-   ======================================================= */
-
-@media (max-width: 1024px) {
-    /* 1. SỬA LẠI LOGO TRÊN ĐIỆN THOẠI CHO GỌN GÀNG */
-    .custom_header > .logo-banner-svg-wrapper {
+    /* Đặt logo nằm cạnh nút menu 3 gạch, căn giữa chiều dọc */
+    .logo-banner-svg-wrapper {
         position: absolute !important;
-        left: 65px !important; /* Né cái nút 3 gạch ra */
-        transform: none !important;
+        left: 70px !important; /* Dịch qua phải để chừa chỗ cho hamburger */
+        top: 50% !important;
+        transform: translateY(-50%) !important;
         width: auto !important;
-        height: 100% !important;
-        display: flex !important;
-        align-items: center !important;
+        height: 50px !important;
     }
     
-    /* Ẩn cái khiên nền xanh đi trên mobile để không bị thòng xuống che nội dung */
-    .logo-banner-svg-wrapper .logo-banner-svg {
+    /* Ẩn cái background khiên SVG bị lồi trên điện thoại */
+    .logo-banner-svg {
         display: none !important; 
     }
 
-    /* Ép logo nhỏ lại vừa vặn với thanh Header */
-    .logo-banner-svg-wrapper .logo-img {
-        height: 45px !important; 
+    .logo-img {
+        height: 50px !important;
         transform: none !important;
-        padding: 0 !important;
     }
+
+    .menu-toggle {
+        display: flex;
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    /* Đã xóa login ở CSS nên không cần display: none ở đây nữa */
+
+    /* --- MOBILE MENU --- */
+    .menu {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: linear-gradient(135deg, #689cef 0%, #3b82f6 100%);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 20px;
+        transform: translateX(-100%);
+        transition: transform 0.4s ease;
+        visibility: hidden;
+        overflow-y: auto;
+    }
+
+    .menu.active {
+        transform: translateX(0);
+        visibility: visible;
+        display: flex;
+    }
+
+    .nav-list { flex-direction: column; width: 100%; gap: 0; }
+    .menu-item { width: 100%; border-bottom: 1px solid rgba(255, 255, 255, 0.15); }
+    .menu-item:last-child { border-bottom: none; }
+    .menu-item > a { padding: 15px 10px; font-size: 18px; border-radius: 0; }
+
+    .sub_menu {
+        position: static;
+        display: none;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: none;
+        padding: 10px;
+        transform: translateY(0);
+        visibility: visible;
+        opacity: 1;
+        margin-bottom: 10px;
+    }
+
+    .menu-item:hover .sub_menu { display: block; }
+    .sub_menu li a { color: white !important; }
+    .sub_menu li a:hover { background: rgba(255, 255, 255, 0.2); color: white !important; }
+
+    /* --- HERO SECTION --- */
+    .hero-content { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+    .hero-text, .hero-title, .hero-subtitle { text-align: center; }
+    .hero-buttons { justify-content: center; }
+    .hero-stats { flex-direction: row; justify-content: center; }
+    #Banner img { height: 300px; }
+
+  /* Ẩn logo to đùng và rườm rà của desktop */
+  .desktop-logo { 
+      display: none !important; 
+  }
+
+  /* Hiển thị tiêu đề text gọn gàng, căn giữa tuyệt đối trên Header */
+  .mobile-header-title {
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-decoration: none;
+      white-space: nowrap;
+      text-transform: uppercase;
+  }
+
+  /* --- STYLING CHO LOGO TRONG MENU TRƯỢT --- */
+  .mobile-menu-logo-wrapper {
+      display: block;
+      width: 100%;
+      padding: 20px 0 30px 0;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  /* Tạo khung nền trắng, bo tròn 50% cho file LOGO.png */
+  .mobile-menu-logo {
+      background: white;
+      width: 100px;
+      height: 100px;
+      margin: 0 auto;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+      padding: 10px;
+  }
+
+  .mobile-menu-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+  }
+  
 }
 
+/* 3. MOBILE (Max-width: 768px) */
 @media (max-width: 768px) {
-    /* 2. ÉP NHỎ LẠI CÁC CHỮ THÔNG BÁO, HOẠT ĐỘNG KHỔNG LỒ */
-    .hero-section .hero-title,
-    .hero-section .hero-title1,
-    .scrapbook-title {
-        font-size: 2rem !important;
-        line-height: 1.4 !important;
-        word-wrap: break-word !important; /* Tự động xuống dòng gọn gàng */
-        padding: 0 10px;
+    .hero-title { font-size: 2.5rem !important; }
+    .hero-section .hero-title1 { font-size: 2.2rem !important; text-align: center; }
+    .scrapbook-title { font-size: 2rem !important; padding-left: 0; text-align: center; }
+    .hero-stats { flex-direction: column; align-items: center; }
+    .stat-item { max-width: 100%; }
+
+    /* --- FOOTER FIX --- */
+    .footer_top {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 40px 20px;
+        text-align: center; /* Ép mọi thứ căn giữa */
+    }
+
+    .footer_top > li:not(:first-child) {
+        border-left: none;
+        padding-left: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 30px;
+    }
+
+    /* Ép logo và text nằm dọc trên điện thoại */
+    .footer-logo {
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 15px !important;
+    }
+
+    .footer-logo img {
+        width: 80px !important;
+        height: 80px !important;
+    }
+
+    /* Thu nhỏ text logo trên điện thoại */
+    .footer-logo__text {
+        font-size: 22px !important; 
+        text-align: center;
+        white-space: normal !important;
+    }
+
+    .sub_footer { align-items: center; }
+    .sub_footer > li { justify-content: center !important; }
+    .sub_footer p { text-align: center; }
+    .footer_icon { justify-content: center; }
+
+    .Introduce_contents { padding: 0 20px 40px; }
+    .orientation-header { flex-direction: column; align-items: center; text-align: center; }
+}
+
+/* 4. MOBILE NHỎ (Max-width: 480px) */
+@media (max-width: 480px) {
+    .custom_header { height: 60px; padding: 0 15px; }
+    .menu { top: 60px; height: calc(100vh - 60px); }
+    
+    .logo-banner-svg-wrapper {
+        left: 60px !important; /* Vẫn giữ khoảng cách tránh nút 3 gạch */
+        height: 40px !important;
     }
     
-    /* Thu gọn chiều cao của banner trên điện thoại */
-    .hero-section {
-        min-height: 180px !important;
-        padding: 60px 15px 30px !important;
-    }
+    .logo-img { height: 40px !important; }
+
+    .hero-title { font-size: 2rem !important; }
+    .hero-subtitle { font-size: 1rem; }
+    .btn { width: 100%; justify-content: center; }
+    #Banner img { height: 200px; border-radius: 0 0 10px 10px; }
+    .floating-card { display: none; }
+}
+
+/* ============================================================================
+   FIX LỖI THẺ ABOUT (VÀ CÁC THẺ CARD KHÁC) BỊ SÁT LỀ TRÊN MOBILE
+   ============================================================================ */
+
+@media (max-width: 1420px) {
+  /* Áp dụng cho các khối chính trong trang Giới thiệu */
+  .about-section,
+  .about-card,
+  .value-item {
+    /* Đẩy chữ bên trong cách xa viền thẻ ra một chút */
+    /* padding: 25px 20px !important;  */
+    /* Đẩy toàn bộ thẻ lùi vào trong, không cho chạm sát mép màn hình xám */
+    margin: 0 20px 25px 20px !important; 
+
+    /* --- HIỆU ỨNG NỔI BẬT --- */
+    background-color: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important; /* Viền xám cực kỳ nhạt bao quanh */
+    border-top: 4px solid #3b82f6 !important; /* Đường viền xanh nhấn nhá ở cạnh trên cùng */
+    border-radius: 12px !important; /* Bo góc mềm mại */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important; /* Đổ bóng sâu giúp khối nổi bồng lên so với nền */
+  }
+
 }
 
 @media (max-width: 480px) {
-    /* 3. MÀN HÌNH CỰC NHỎ (Như điện thoại của bạn trong ảnh) */
-    .hero-section .hero-title,
-    .hero-section .hero-title1,
-    .scrapbook-title {
-        font-size: 1.6rem !important; /* Chữ nhỏ nhắn lại */
-    }
-    
-    .custom_header > .logo-banner-svg-wrapper {
-        left: 55px !important;
-    }
-    
-    .logo-banner-svg-wrapper .logo-img {
-        height: 35px !important;
-    }
+  /* Ép lại một xíu cho các màn hình điện thoại cực nhỏ (như iPhone đời cũ) */
+  .about-section,
+  .about-card,
+  .value-item {
+      /* padding: 20px 15px !important;  */
+      margin: 0 10px 20px 10px !important; 
+  }
 }

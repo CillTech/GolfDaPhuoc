@@ -24,7 +24,7 @@ include "header.php";
 
     <!-- Banner Image Section -->
     <section id="Banner">
-        <img src="Image/Slide1.jpg" alt="Banner" loading="eager" />
+        <img src="Image/act-1.jpg" alt="Banner" loading="eager" />
     </section>
     
     <!-- Hero Section -->

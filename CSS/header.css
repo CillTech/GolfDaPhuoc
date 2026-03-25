@@ -1,4 +1,7 @@
-
+/* ============================================================================
+   HEADER CHÍNH - HEADER.CSS
+   Đã xóa phần Login và Media Queries thừa
+   ============================================================================ */
 .custom_header {
   display: flex;
   justify-content: space-between;
@@ -98,7 +101,6 @@
   font-size: 18px;
 }
 
-/* Hiệu ứng shimmer khi hover */
 .menu-item > a::before {
   content: '';
   position: absolute;
@@ -120,7 +122,6 @@
   transform: translateY(-1px);
 }
 
-/* Active State (Trang hiện tại) - Viền sáng rực rỡ */
 .menu-item > a.active {
   font-weight: 700;
   color: white;
@@ -141,19 +142,8 @@
 }
 
 @keyframes slideInUnderline {
-  from {
-    width: 0;
-    opacity: 0;
-  }
-  to {
-    width: 80%;
-    opacity: 1;
-  }
-}
-
-.menu-item > a.active:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-  transform: translateY(-1px);
+  from { width: 0; opacity: 0; }
+  to { width: 80%; opacity: 1; }
 }
 
 /* Sub-menu */
@@ -192,12 +182,6 @@
   display: block;
   text-decoration: none;
   transition: all 0.2s ease;
-  overflow: visible;
-}
-
-.sub_menu li a::before,
-.sub_menu li a::after {
-  display: none;
 }
 
 .sub_menu li a:hover {
@@ -207,62 +191,6 @@
   transform: none; 
 }
 
-/* 3. Phần Login Button */
-.login {
-  position: absolute; /* Tách khỏi luồng đẩy của Flexbox */
-  right: 10%; /* Đối xứng với left: 10% của phần logo */
-  top: 50%; /* Đẩy xuống giữa */
-  transform: translateY(-50%); /* Căn giữa hoàn hảo theo chiều dọc */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.login a {
-  width: 42px;
-  height: 42px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  border-radius: 50%;
-  font-size: 20px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.login a:hover {
-  background: white;
-  color: var(--primary-color);
-  transform: scale(1.1);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-}
-
-/* Mobile Toggle (Dấu 3 gạch) */
-.menu-toggle {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-}
-
-.menu-toggle span {
-  width: 25px;
-  height: 3px;
-  background: white;
-  border-radius: 2px;
-}
-
-/* Responsive cơ bản */
-@media (max-width: 1024px) {
-  .menu {
-    display: none;
-  }
-  .menu-toggle {
-    display: flex;
-  }
-  .logo-text {
-    font-size: 20px;
-  }
-}
+/* --- ẨN THÀNH PHẦN MOBILE TRÊN DESKTOP --- */
+.mobile-header-title { display: none; }
+.mobile-menu-logo-wrapper { display: none; }
