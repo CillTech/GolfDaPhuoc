@@ -94,7 +94,7 @@ $author_initial = mb_strtoupper(mb_substr($article['author'], 0, 1, 'UTF-8'), 'U
 
                 <!-- Nút hành động: Quay lại + Chia sẻ -->
                 <div class="journal-actions">
-                    <a href="blog.php" class="btn-back">
+                    <a href="Blog.php" class="btn-back">
                         <i class="fas fa-arrow-left"></i> Quay lại Blog
                     </a>
                     <div class="share-group">
