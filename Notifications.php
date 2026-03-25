@@ -1,17 +1,17 @@
 <?php
 include 'header.php';
+include 'config.php';
 
-$activities = [
-    [
-        'title' => 'Thông báo chương trình học bổng Ươm mầm tài năng Năm học 2025-2026',
-        'image' => 'Image/act-1.jpg', 
-        'date' => '13/10/2025', 
-        'author' => 'Admin',
-        'excerpt' => 'I. Lời giới thiệu Quỹ học bổng Ươm mầm tài năng. Quỹ được thành lập với mục tiêu hỗ trợ các em học sinh, sinh viên có hoàn cảnh khó khăn...',
-        'comments' => 0,
-        'link' => 'detail.php?id=1'
-    ],
-];
+// Thay bằng URL API của bạn từ SheetDB
+$api_url = BASE_URL;
+$response = file_get_contents($api_url);
+$activities = json_decode($response, true);
+if ($activities) {
+    $activities = array_reverse($activities); // Đảo ngược mảng
+}
+
+// Nếu lấy dữ liệu thất bại, gán mảng rỗng
+if (!$activities) $activities = [];
 ?>
 
 <link rel="stylesheet" href="CSS/about.css">
@@ -29,26 +29,22 @@ $activities = [
     <div class="blog-layout">
         
         <div class="main-articles">
-            <?php foreach ($activities as $act): ?>
-                <article class="horizontal-card">
-                    <a href="<?php echo $act['link']; ?>" class="h-card-image">
-                        <img src="<?php echo $act['image']; ?>" alt="Hình ảnh hoạt động">
+            <?php foreach ($activities as $act): 
+                // Tự tạo link đến trang chi tiết bằng ID từ Sheet
+                $detail_link = "detail.php?id=" . $act['id']; 
+            ?>
+            <article class="horizontal-card">
+                <a href="<?php echo $detail_link; ?>" class="h-card-image">
+                    <img src="<?php echo $act['image']; ?>" alt="Hình ảnh">
+                </a>
+                
+                <div class="h-card-content">
+                    <a href="<?php echo $detail_link; ?>" class="h-card-title-link">
+                        <h3 class="h-card-title"><?php echo $act['title']; ?></h3>
                     </a>
-                    
-                    <div class="h-card-content">
-                        <a href="<?php echo $act['link']; ?>" class="h-card-title-link">
-                            <h3 class="h-card-title"><?php echo $act['title']; ?></h3>
-                        </a>
-                        
-                        <div class="h-card-meta">
-                            <span class="meta-item"><?php echo strtoupper($act['author']); ?></span>
-                            <span class="meta-item"><i class="far fa-clock"></i> <?php echo $act['date']; ?></span>
-                            <span class="meta-item"><i class="fas fa-comment"></i> <?php echo $act['comments']; ?></span>
-                        </div>
-                        
-                        <p class="h-card-excerpt"><?php echo $act['excerpt']; ?></p>
-                    </div>
-                </article>
+                    <p class="h-card-excerpt"><?php echo $act['excerpt']; ?></p>
+                </div>
+            </article>
             <?php endforeach; ?>
         </div>
 
@@ -61,12 +57,14 @@ $activities = [
                     foreach ($recent_posts as $post): 
                     ?>
                         <div class="sidebar-post">
-                            <a href="<?php echo $post['link']; ?>" class="sp-image">
-                                <img src="<?php echo $post['image']; ?>" alt="Thumbnail">
+                            <a href="detail.php?id=<?php echo $act['id']; ?>" class="sp-image">
+                                <img src="<?php echo $act['image']; ?>" alt="Thumbnail">
                             </a>
                             <div class="sp-content">
-                                <a href="<?php echo $post['link']; ?>" class="sp-title"><?php echo $post['title']; ?></a>
-                                <span class="sp-date"><?php echo $post['date']; ?></span>
+                                <a href="detail.php?id=<?php echo $act['id']; ?>" class="sp-title">
+                                    <?php echo $act['title']; ?>
+                                </a>
+                                <span class="sp-date"><?php echo $act['date']; ?></span>
                             </div>
                         </div>
                     <?php endforeach; ?>
