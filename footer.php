@@ -7,7 +7,7 @@
         <a class="footer_title">Liên hệ</a>
         <ul class="sub_footer">
             <div class="footer-logo">
-                <img src="Image/Logo.png" alt="TeachHub logo" />
+                <img src="Image/LOGO.png" alt="Logo" />
                 <span class="footer-logo__text">ƯƠM MẦM TÀI NĂNG</span>
             </div>
             <li>
