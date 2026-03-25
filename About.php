@@ -11,10 +11,6 @@ include 'header.php';
             <h1 class="hero-title">Về Quỹ Học Bổng Chúng Tôi</h1>
             <p class="hero-subtitle">Thắp sáng ước mơ, kiến tạo tương lai. Chúng tôi đồng hành cùng những tài năng trẻ trên con đường chinh phục tri thức.</p>
         </div>
-        <div class="hero-decoration">
-            <div class="floating-card card-1">🌟</div>
-            <div class="floating-card card-2">📚</div>
-        </div>
     </div>
 </section>
 

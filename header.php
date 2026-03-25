@@ -23,10 +23,7 @@ $menuDefinitions = [
     [
         'label' => 'Hoạt động',
         'href_php' => 'Activities.php',
-        'children' => [
-            ['label' => 'Sự kiện', 'href_php' => 'Events.php'],
-            ['label' => 'Thư viện ảnh', 'href_php' => 'Gallery.php']
-        ]
+        'children' => []
     ],
     [
         'label' => 'Blog',
