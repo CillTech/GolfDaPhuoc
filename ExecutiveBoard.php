@@ -1,53 +1,73 @@
-<?php include 'header.php'; ?>
+<?php 
+include 'header.php'; 
+include 'config.php';
+
+// 1. Gọi API lấy danh sách từ tab 'bdh'
+$api_url = URL_BDH;
+$response = @file_get_contents($api_url);
+$all_members = json_decode($response, true);
+
+if (!$all_members) $all_members = [];
+
+// 2. Lọc danh sách thành 2 nhóm dựa trên cột 'position'
+// Nhóm Ban điều hành
+$bdh_list = array_filter($all_members, function($m) {
+    return trim($m['position']) === 'Ban điều hành';
+});
+
+// Nhóm Ban cố vấn
+$bcv_list = array_filter($all_members, function($m) {
+    return trim($m['position']) === 'Ban cố vấn';
+});
+?>
+
 <link rel="stylesheet" href="CSS/about.css">
 <link rel="stylesheet" href="CSS/team.css">
 
-<section class="hero-section text-center">
-    <div class="hero-content">
-            <h1 class="hero-title">Đội Ngũ Điều Hành</h1>
-    </div>
-</section>
-
 <main class="container team-main">
     
-    <section class="team-section">
+    <section class="team-group">
+        <h2 class="section-subtitle">Ban Điều Hành</h2>
         <div class="team-grid">
-            
-            <div class="team-card">
-                <div class="member-avatar">
-                    </div>
-                <h3 class="member-name">Trần Văn Quản</h3>
-                <p class="member-role">Giám Đốc Quỹ</p>
-                <p class="member-bio">Có hơn 10 năm kinh nghiệm trong lĩnh vực giáo dục và quản lý dự án phi chính phủ. Chịu trách nhiệm định hướng chiến lược và phát triển toàn diện cho Quỹ.</p>
-            </div>
+            <?php foreach ($bdh_list as $member): ?>
+                <?php renderMemberCard($member); ?>
+            <?php endforeach; ?>
+        </div>
+    </section>
 
-            <div class="team-card">
-                <div class="member-avatar">
-                    </div>
-                <h3 class="member-name">Lê Thị Minh</h3>
-                <p class="member-role">Trưởng Ban Tài Chính</p>
-                <p class="member-bio">Chuyên gia kiểm toán với chứng chỉ quốc tế. Đảm bảo mọi luồng tiền tài trợ được phân bổ minh bạch, hiệu quả và đến đúng tay các em sinh viên.</p>
-            </div>
+    <hr class="section-divider">
 
-            <div class="team-card">
-                <div class="member-avatar">
-                    </div>
-                <h3 class="member-name">Phạm Hoàng Nam</h3>
-                <p class="member-role">Trưởng Ban Truyền Thông</p>
-                <p class="member-bio">Người kết nối câu chuyện của các em học sinh với cộng đồng. Phụ trách lan tỏa thông điệp và tổ chức các chiến dịch gây quỹ thường niên.</p>
-            </div>
-
-            <div class="team-card">
-                <div class="member-avatar">
-                    </div>
-                <h3 class="member-name">Hoàng Thu Thảo</h3>
-                <p class="member-role">Trưởng Ban Đối Ngoại</p>
-                <p class="member-bio">Đại diện Quỹ làm việc trực tiếp với các trường Đại học và chính quyền địa phương để tìm kiếm và xác minh các hoàn cảnh khó khăn cần giúp đỡ.</p>
-            </div>
-
+    <section class="team-group">
+        <h2 class="section-subtitle">Ban Cố Vấn</h2>
+        <div class="team-grid">
+            <?php foreach ($bcv_list as $member): ?>
+                <?php renderMemberCard($member); ?>
+            <?php endforeach; ?>
         </div>
     </section>
 
 </main>
+
+<?php 
+// Hàm phụ để hiển thị Card thành viên (tránh lặp code)
+function renderMemberCard($member) {
+    ?>
+    <div class="team-card">
+        <div class="member-avatar">
+            <?php if (!empty($member['image'])): ?>
+                <img src="<?php echo htmlspecialchars($member['image']); ?>" alt="Avatar">
+            <?php else: ?>
+                <div class="avatar-placeholder">
+                    <?php echo mb_strtoupper(mb_substr($member['name'], 0, 1, 'UTF-8')); ?>
+                </div>
+            <?php endif; ?>
+        </div>
+        <h3 class="member-name"><?php echo htmlspecialchars($member['name']); ?></h3>
+        <p class="member-role"><?php echo htmlspecialchars($member['position']); ?></p>
+        <p class="member-bio"><?php echo $member['detail']; ?></p>
+    </div>
+    <?php
+}
+?>
 
 <?php include 'footer.php'; ?>
