@@ -96,14 +96,13 @@ if ($sponsors_home) {
 
         <section class="news-section mt-5" style="margin-top: 100px; padding-top: 50px;">
             <div class="section-header-center">
-                <h2 class="section-title-center">BẢNG VÀNG TRI ÂN</h2>
+                <h2 class="section-title-center">TRI ÂN MẠNH THƯỜNG QUÂN</h2>
             </div>
             
             <style>
                 .honor-grid {
                     display: grid;
                     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-                    /* Tăng khoảng cách vertical (gap-row) để chừa chỗ cho ảnh to */
                     gap: 100px 30px; 
                     max-width: 1200px;
                     margin: 80px auto 20px;
@@ -112,7 +111,6 @@ if ($sponsors_home) {
                 .honor-plaque {
                     background: #fff;
                     border-radius: 16px;
-                    /* Tăng padding-top để chừa chỗ cho ảnh to nổi lên */
                     padding: 90px 20px 30px; 
                     text-align: center;
                     box-shadow: 0 10px 25px rgba(0,0,0,0.06);
@@ -125,14 +123,12 @@ if ($sponsors_home) {
                     box-shadow: 0 15px 35px rgba(0,0,0,0.12);
                 }
                 .plaque-avatar {
-                    /* --- TĂNG KÍCH THƯỚC ẢNH LÊN 160px --- */
                     width: 160px;
                     height: 160px;
                     border-radius: 50%;
-                    border: 8px solid #fff; /* Tăng độ dày viền trắng cho cân đối */
+                    border: 8px solid #fff; 
                     box-shadow: 0 5px 15px rgba(0,0,0,0.15);
                     position: absolute;
-                    /* Đẩy ảnh lên cao hơn một nửa kích thước mới */
                     top: -80px; 
                     left: 50%;
                     transform: translateX(-50%);
@@ -140,7 +136,7 @@ if ($sponsors_home) {
                     object-fit: cover;
                 }
                 .sponsor-name {
-                    font-size: 1.3rem; /* Tăng nhẹ font size tên cho cân */
+                    font-size: 1.3rem; 
                     font-weight: 800;
                     color: var(--text-primary);
                     margin-bottom: 5px;
@@ -158,10 +154,9 @@ if ($sponsors_home) {
                 }
                 .heart-icon {
                     color: #ef4444;
-                    font-size: 1.8rem; /* Tăng icon tim */
+                    font-size: 1.8rem; 
                     margin-bottom: 10px;
                 }
-                /* Reponsive cho Mobile */
                 @media (max-width: 600px) {
                     .honor-grid { gap: 80px 20px; grid-template-columns: 1fr;}
                     .plaque-avatar { width: 120px; height: 120px; top: -60px;}

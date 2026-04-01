@@ -1,6 +1,3 @@
-
-
-/* --- HERO SECTION (Giữ nguyên tông màu mới) --- */
 .hero-section.honor-list-hero {
     min-height: 250px; 
     background-color: var(--bg-primary, #ffffff); 
@@ -10,30 +7,24 @@
 }
 
 .hero-title1.honor-list-title {
-    font-size: 3rem; 
+    font-size: 2.5rem; 
     font-weight: 900; 
     color: var(--primary-color, #0d3b75) !important; 
     text-shadow: 1px 1px 2px rgba(0,0,0,0.1); 
     text-transform: uppercase; 
     letter-spacing: 2px; 
     margin-bottom: 0px;
-    position: relative; 
     display: inline-block;
+    white-space: nowrap; /* Ép dòng tiêu đề dàn ra 1 dòng duy nhất */
 }
 
-.hero-title1.honor-list-title::after {
-    content: '';
-    position: absolute;
-    bottom: -15px; 
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%; 
-    height: 3px;
-    background-color: var(--primary-color, #0d3b75);
-    border-radius: 2px;
+/* Thêm class cho subtitle để tăng cỡ chữ */
+.honor-list-subtitle {
+    font-size: 1.1rem; 
+    color: var(--text-secondary, #6b7280);
+    margin-top: 15px;
 }
 
-/* --- HONOR CONTAINER & GRID (CĂN CHỈNH KHOẢNG CÁCH) --- */
 .honor-container {
     padding: 60px 0 100px;
     background-color: var(--bg-secondary, #f3f4f6); 
@@ -44,7 +35,7 @@
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 100px 30px; 
     max-width: 1200px;
-    margin: 60px auto 0; /* Tăng margin-top để thẻ đầu tiên ko đè lên Hero */
+    margin: 60px auto 0; 
     padding: 0 20px;
 }
 
@@ -72,7 +63,7 @@
     width: 160px;
     height: 160px;
     border-radius: 50%;
-    border: 8px solid var(--bg-prismary, #ffffff); 
+    border: 8px solid var(--bg-primary, #ffffff); /* Đã sửa lỗi chính tả var(--bg-prismary) thành var(--bg-primary) */
     box-shadow: 0 5px 15px rgba(0,0,0,0.15);
     position: absolute;
     top: -80px; 
@@ -138,6 +129,10 @@
 }
 
 @media screen and (max-width: 600px) {
+    .hero-title1.honor-list-title {
+        font-size: 2.2rem;
+        white-space: normal; 
+    }
     .honor-grid { gap: 80px 20px; grid-template-columns: 1fr; padding: 0 30px;}
     .plaque-avatar { width: 120px; height: 120px; top: -60px;}
     .honor-plaque { padding-top: 70px;}
