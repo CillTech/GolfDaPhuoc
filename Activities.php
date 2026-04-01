@@ -17,68 +17,42 @@ if ($activities) {
 ?>
 
 <link rel="stylesheet" href="CSS/about.css">
-<link rel="stylesheet" href="CSS/notifications.css">
-
-<section class="hero-section" style="min-height: 200px;">
-    <div class="hero-content" style="grid-template-columns: 1fr;">
-        <div class="hero-text" style="text-align: center;">
-            <h1 class="hero-title1" style="text-align: center;">Hoạt Động</h1>
-        </div>
+<link rel="stylesheet" href="CSS/activities.css"> <section class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title1" style="text-align: center;">Hoạt Động</h1>
     </div>
 </section>
 
-<main class="container Introduce_contents" style="margin-top: 50px; margin-bottom: 80px;">
-    <div class="blog-layout">
-        
-        <div class="main-articles">
-            <?php foreach ($activities as $act): 
+<main class="container" style="margin-bottom: 80px;">
+    <div class="timeline-container">
+        <?php 
+        if (!empty($activities)):
+            foreach ($activities as $index => $act): 
                 $detail_link = "detail.php?type=activities&id=" . $act['id']; 
-            ?>
-            <article class="horizontal-card">
-                <a href="<?php echo $detail_link; ?>" class="h-card-image">
-                    <img src="<?php echo $act['image']; ?>" alt="Hình ảnh hoạt động">
-                </a>
-                
-                <div class="h-card-content">
-                    <a href="<?php echo $detail_link; ?>" class="h-card-title-link">
-                        <h3 class="h-card-title"><?php echo $act['title']; ?></h3>
+                // Kiểm tra chẵn lẻ để xếp so le trái - phải
+                $position_class = ($index % 2 == 0) ? 'left' : 'right';
+        ?>
+            <div class="timeline-item <?php echo $position_class; ?>">
+                <div class="timeline-content">
+                    <span class="time-badge"><?php echo $act['date']; ?></span>
+                    
+                    <a href="<?php echo $detail_link; ?>" class="timeline-image-link" style="margin-top: 15px;">
+                        <img src="<?php echo $act['image']; ?>" alt="Hình hoạt động" class="timeline-img">
                     </a>
-                    <p class="h-card-excerpt"><?php echo $act['excerpt']; ?></p>
-                </div>
-            </article>
-            <?php endforeach; ?>
-            
-            <?php if (empty($activities)): ?>
-                <p style="text-align: center; color: #666; font-style: italic; padding: 20px;">
-                    Hiện chưa có bài viết hoạt động nào.
-                </p>
-            <?php endif; ?>
-        </div>
-
-        <aside class="sidebar">
-            <div class="widget">
-                <h3 class="widget-title">Hoạt động mới nhất</h3>
-                <div class="widget-content">
-                    <?php 
-                    $recent_posts = array_slice($activities, 0, 4);
-                    foreach ($recent_posts as $post): 
-                    ?>
-                        <div class="sidebar-post">
-                            <a href="detail.php?type=activities&id=<?php echo $post['id']; ?>" class="sp-image">
-                                <img src="<?php echo $post['image']; ?>" alt="Thumbnail">
-                            </a>
-                            <div class="sp-content">
-                                <a href="detail.php?type=activities&id=<?php echo $post['id']; ?>" class="sp-title">
-                                    <?php echo $post['title']; ?>
-                                </a>
-                                <span class="sp-date"><?php echo $post['date']; ?></span>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
+                    
+                    <a href="<?php echo $detail_link; ?>">
+                        <h3><?php echo $act['title']; ?></h3>
+                    </a>
+                    
+                    <p><?php echo $act['excerpt']; ?></p>
                 </div>
             </div>
-        </aside>
-
+        <?php 
+            endforeach; 
+        else:
+            echo "<p style='text-align: center; color: #666; padding: 50px 0;'>Hiện chưa có bài viết hoạt động nào.</p>";
+        endif;
+        ?>
     </div>
 </main>
 

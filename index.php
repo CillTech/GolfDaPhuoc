@@ -3,20 +3,20 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 include "header.php";
-include "config.php"; // Nhớ gọi config để có link API
+include "config.php"; 
 
-// 1. Kéo dữ liệu 4 Hoạt động mới nhất từ Sheet 'blog'
-$activities_home = json_decode(@file_get_contents(URL_BLOG), true);
+// 1. Kéo dữ liệu Hoạt động từ Sheet 'blog'
+$activities_home = json_decode(@file_get_contents(URL_ACTIVITIES), true);
 if ($activities_home) {
     $activities_home = array_slice(array_reverse($activities_home), 0, 4);
 } else {
     $activities_home = [];
 }
 
-// 2. Kéo dữ liệu 4 Mạnh thường quân mới nhất từ Sheet 'sponsors'
+// 2. Kéo dữ liệu Mạnh thường quân từ Sheet 'sponsors' (Lấy 6 người cho đẹp đội hình)
 $sponsors_home = json_decode(@file_get_contents(URL_SPONSORS), true);
 if ($sponsors_home) {
-    $sponsors_home = array_slice(array_reverse($sponsors_home), 0, 4);
+    $sponsors_home = array_slice(array_reverse($sponsors_home), 0, 6);
 } else {
     $sponsors_home = [];
 }
@@ -32,30 +32,15 @@ if ($sponsors_home) {
                 <h1 class="hero-title">CLB Golf Đa Phước</h1>
                 <p class="hero-subtitle">Đồng hành cùng thế hệ trẻ Đà Nẵng</p>
                 <div class="hero-buttons">
-                    <a href="Notifications.php" class="btn btn-primary">
-                        <i class="fas fa-search"></i> Thông báo
-                    </a>
-                    <a href="Sponsorship.php" class="btn btn-secondary">
-                        <i class="fas fa-chalkboard-teacher"></i> Tài trợ
-                    </a>
-                    <a href="About.php" class="btn btn-primary">
-                        Biết thêm về chúng tôi
-                    </a>
+                    <a href="Notifications.php" class="btn btn-primary"><i class="fas fa-search"></i> Thông báo</a>
+                    <a href="Sponsorship.php" class="btn btn-secondary"><i class="fas fa-chalkboard-teacher"></i> Tài trợ</a>
+                    <a href="About.php" class="btn btn-primary">Biết thêm về chúng tôi</a>
                 </div>
             </div>
             <div class="hero-stats">
-                <div class="stat-item">
-                    <div class="stat-number">50+</div>
-                    <div class="stat-label">Kỹ sư chuyên nghiệp</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">100+</div>
-                    <div class="stat-label">Sinh viên thành công</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">98%</div>
-                    <div class="stat-label">Tỷ lệ tốt nghiệp loại giỏi</div>
-                </div>
+                <div class="stat-item"><div class="stat-number">50+</div><div class="stat-label">Kỹ sư chuyên nghiệp</div></div>
+                <div class="stat-item"><div class="stat-number">100+</div><div class="stat-label">Sinh viên thành công</div></div>
+                <div class="stat-item"><div class="stat-number">98%</div><div class="stat-label">Tỷ lệ tốt nghiệp loại giỏi</div></div>
             </div>
         </div>
         
@@ -75,13 +60,10 @@ if ($sponsors_home) {
             
             <div class="carousel-wrapper" id="activity-carousel">
                 <button class="carousel-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
-                
                 <div class="carousel-track">
                     <?php 
                     if (!empty($activities_home)):
                         foreach ($activities_home as $act): 
-                            // Tách ngày tháng để đưa vào cái Badge tròn tròn
-                            // Giả sử ngày trong sheet format là 25/03/2026
                             $date_parts = explode('/', $act['date'] ?? '01/01/2026');
                             $day = $date_parts[0] ?? '01';
                             $month = $date_parts[1] ?? '01';
@@ -104,7 +86,6 @@ if ($sponsors_home) {
                     endif;
                     ?>
                 </div>
-
                 <button class="carousel-btn next-btn"><i class="fas fa-chevron-right"></i></button>
             </div>
             <div class="carousel-dots">
@@ -113,45 +94,107 @@ if ($sponsors_home) {
             </div>
         </section>
 
-        <section class="news-section mt-5">
+        <section class="news-section mt-5" style="margin-top: 80px;">
             <div class="section-header-center">
                 <h2 class="section-title-center">TRI ÂN MẠNH THƯỜNG QUÂN</h2>
             </div>
             
-            <div class="carousel-wrapper" id="sponsor-carousel">
-                <button class="carousel-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
-                
-                <div class="carousel-track">
-                    <?php 
-                    if (!empty($sponsors_home)):
-                        foreach ($sponsors_home as $sponsor): 
-                    ?>
-                        <a href="detail.php?type=sponsors&id=<?php echo $sponsor['id']; ?>" class="card-item">
-                            <img src="<?php echo $sponsor['image']; ?>" alt="Nhà tài trợ" class="card-image">
-                            <div class="card-content">
-                                <h3 class="card-title"><?php echo $sponsor['title']; ?></h3>
-                                <p class="card-excerpt"><?php echo $sponsor['excerpt']; ?></p>
-                            </div>
-                        </a>
-                    <?php 
-                        endforeach; 
-                    else:
-                        echo "<p>Chưa có dữ liệu nhà tài trợ mới.</p>";
-                    endif;
-                    ?>
-                </div>
+            <style>
+                .honor-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                    gap: 40px 30px;
+                    max-width: 1200px;
+                    margin: 60px auto 20px;
+                    padding: 0 10px;
+                }
+                .honor-plaque {
+                    background: #fff;
+                    border-radius: 16px;
+                    padding: 50px 20px 30px;
+                    text-align: center;
+                    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+                    position: relative;
+                    border-top: 6px solid #fbbf24; /* Viền vàng hoàng gia */
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                }
+                .honor-plaque:hover {
+                    transform: translateY(-8px);
+                    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+                }
+                .plaque-avatar {
+                    width: 90px;
+                    height: 90px;
+                    border-radius: 50%;
+                    border: 5px solid #fff;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                    position: absolute;
+                    top: -45px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: #f8fafc;
+                    object-fit: cover;
+                }
+                .sponsor-name {
+                    font-size: 1.25rem;
+                    font-weight: 800;
+                    color: var(--text-primary);
+                    margin-bottom: 5px;
+                }
+                .sponsor-contribution {
+                    font-size: 1.2rem;
+                    font-weight: 900;
+                    color: #d97706;
+                    background: #fef3c7;
+                    display: inline-block;
+                    padding: 8px 25px;
+                    border-radius: 30px;
+                    margin-top: 15px;
+                    border: 1px dashed #f59e0b;
+                }
+                .heart-icon {
+                    color: #ef4444;
+                    font-size: 1.5rem;
+                    margin-bottom: 10px;
+                }
+            </style>
 
-                <button class="carousel-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+            <div class="honor-grid">
+                <?php 
+                if (!empty($sponsors_home)):
+                    foreach ($sponsors_home as $sponsor): 
+                ?>
+                    <div class="honor-plaque">
+                        <img src="<?php echo $sponsor['image']; ?>" alt="Nhà tài trợ" class="plaque-avatar">
+                        <div class="heart-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                        
+                        <h3 class="sponsor-name"><?php echo $sponsor['title']; ?></h3>
+                        <p style="color: #666; font-size: 0.95rem; margin-bottom: 0;">Đã đóng góp</p>
+                        
+                        <div class="sponsor-contribution">
+                            <?php echo $sponsor['excerpt']; ?>
+                        </div>
+                    </div>
+                <?php 
+                    endforeach; 
+                else:
+                    echo "<p style='text-align:center; grid-column: 1/-1;'>Chưa có dữ liệu nhà tài trợ mới.</p>";
+                endif;
+                ?>
             </div>
-            <div class="carousel-dots">
-                <span class="dot active"></span>
-                <span class="dot"></span>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="HonorList.php" class="btn" style="background: #fffbeb; color: #d97706; border: 2px solid #fbbf24; padding: 12px 35px; border-radius: 30px; font-weight: 800; font-size: 1.1rem; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 10px rgba(251, 191, 36, 0.2);">
+                     Xem Toàn Bộ Danh Sách
+                </a>
             </div>
+
         </section>
         
     </div>
 
     <script>
+        // Script của Carousel Hoạt Động
         document.querySelectorAll('.carousel-wrapper').forEach(wrapper => {
             const track = wrapper.querySelector('.carousel-track');
             const prevBtn = wrapper.querySelector('.prev-btn');
