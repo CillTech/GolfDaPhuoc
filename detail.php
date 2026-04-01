@@ -7,23 +7,19 @@ include 'config.php';
 
 // 1. Lấy ID và Type từ URL
 $id = isset($_GET['id']) ? $_GET['id'] : null;
-$type = isset($_GET['type']) ? $_GET['type'] : 'notifications'; // Mặc định nếu không có type
-
+$type = isset($_GET['type']) ? $_GET['type'] : 'notifications'; 
 if (!$id) {
     echo "<script>alert('Không tìm thấy bài viết!'); window.history.back();</script>";
     exit;
 }
 
-// 2. Xác định tên Sheet cần gọi dữ liệu dựa vào Type
-$sheet_name = 'notifications'; // Mặc định
+$sheet_name = 'notifications'; 
 if ($type === 'activities') {
     $sheet_name = 'blog';
 } elseif ($type === 'sponsors') {
     $sheet_name = 'sponsors';
 }
 
-// 3. Lấy nội dung chi tiết của bài viết hiện tại
-// Ghép thêm &sheet=tên_sheet vào link search để SheetDB biết cần tìm ở tab nào
 $api_detail = BASE_URL . "/search?id=" . $id . "&sheet=" . $sheet_name;
 $res_detail = @file_get_contents($api_detail);
 $data_detail = json_decode($res_detail, true);
@@ -34,13 +30,10 @@ if (!$article) {
     exit;
 }
 
-// 4. Lấy danh sách bài đăng mới cho Sidebar cùng thể loại
-// Ghép thêm ?sheet=tên_sheet vào BASE_URL
 $api_all = BASE_URL . "?sheet=" . $sheet_name;
 $res_all = @file_get_contents($api_all);
 $all_posts = json_decode($res_all, true);
 
-// Đảo ngược để bài mới nhất lên đầu và lấy 4 bài
 if ($all_posts) {
     $recent_posts = array_slice(array_reverse($all_posts), 0, 4);
 } else {
@@ -85,7 +78,6 @@ if ($all_posts) {
                     <?php 
                     $count = 0;
                     foreach ($recent_posts as $post): 
-                        // Bỏ qua bài đang xem hiện tại để không bị lặp lại trong sidebar
                         if ($post['id'] == $id) continue;
                         if ($count >= 4) break;
                         $count++;

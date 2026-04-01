@@ -5,16 +5,14 @@ if (session_status() === PHP_SESSION_NONE) {
 include 'header.php';
 include 'config.php';
 
-// Gọi API từ tab 'blog' (dành cho Hoạt động)
 $api_url = URL_BLOG;
 $response = @file_get_contents($api_url);
 $activities = json_decode($response, true);
 
-// Đảo ngược mảng để bài mới nhất hiện lên đầu
 if ($activities) {
     $activities = array_reverse($activities); 
 } else {
-    $activities = []; // Nếu lỗi hoặc chưa có bài thì gán mảng rỗng
+    $activities = []; 
 }
 ?>
 
@@ -34,7 +32,6 @@ if ($activities) {
         
         <div class="main-articles">
             <?php foreach ($activities as $act): 
-                // Gắn type=activities để detail.php biết đường tìm đúng Google Sheet
                 $detail_link = "detail.php?type=activities&id=" . $act['id']; 
             ?>
             <article class="horizontal-card">
@@ -63,7 +60,6 @@ if ($activities) {
                 <h3 class="widget-title">Hoạt động mới nhất</h3>
                 <div class="widget-content">
                     <?php 
-                    // Cắt lấy 4 bài mới nhất
                     $recent_posts = array_slice($activities, 0, 4);
                     foreach ($recent_posts as $post): 
                     ?>
