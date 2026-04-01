@@ -1,63 +1,88 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 include 'header.php';
+include 'config.php';
 
-$milestones = [
-    [
-        'title' => 'Thành lập Quỹ Học Bổng Ươm mầm tài năng',
-        'desc' => 'Quỹ được thành lập với mục tiêu hỗ trợ học sinh, sinh viên có hoàn cảnh khó khăn.',
-        'time' => 'Tháng 9, 2020',
-        'image' => 'Image/act-1.jpg', 
-        'link' => 'detail.php?id=1'
-    ],
-    [
-        'title' => 'Chương trình Học Bổng Ươm mầm tài năng lần 1',
-        'desc' => 'Trao tặng 100 suất học bổng cho học sinh, sinh viên trên toàn quốc.',
-        'time' => 'Tháng 12, 2020',
-        'image' => 'Image/act-1.jpg', 
-        'link' => 'detail.php?id=2'
-    ],
-    [
-        'title' => 'Mở rộng chương trình Học Bổng Ươm mầm tài năng',
-        'desc' => 'Tăng số lượng học bổng lên 200 suất và mở rộng đối tượng nhận học bổng.',
-        'time' => 'Tháng 6, 2021',
-        'image' => 'Image/act-1.jpg', 
-        'link' => 'detail.php?id=3'
-    ],
-];
+// Gọi API từ tab 'blog' (dành cho Hoạt động)
+$api_url = URL_BLOG;
+$response = @file_get_contents($api_url);
+$activities = json_decode($response, true);
+
+// Đảo ngược mảng để bài mới nhất hiện lên đầu
+if ($activities) {
+    $activities = array_reverse($activities); 
+} else {
+    $activities = []; // Nếu lỗi hoặc chưa có bài thì gán mảng rỗng
+}
 ?>
 
 <link rel="stylesheet" href="CSS/about.css">
-<link rel="stylesheet" href="CSS/activities.css">
+<link rel="stylesheet" href="CSS/notifications.css">
 
-<section class="hero-section" style="min-height: 300px;">
+<section class="hero-section" style="min-height: 200px;">
     <div class="hero-content" style="grid-template-columns: 1fr;">
-        <div class="hero-tet" style="text-align: center;">
+        <div class="hero-text" style="text-align: center;">
             <h1 class="hero-title1" style="text-align: center;">Hoạt Động</h1>
         </div>
     </div>
 </section>
 
-<main class="container">
-    <div class="timeline-container">
-        <?php foreach ($milestones as $index => $ms): ?>
-            <div class="timeline-item <?php echo ($index % 2 == 0) ? 'left' : 'right'; ?>" 
-                 style="animation-delay: <?php echo 0.3 + ($index * 0.2); ?>s;">
-                <div class="timeline-content">
-                    
-                    <a href="<?php echo $ms['link']; ?>" class="timeline-image-link">
-                        <img src="<?php echo $ms['image']; ?>" alt="<?php echo $ms['title']; ?>" class="timeline-img">
+<main class="container Introduce_contents" style="margin-top: 50px; margin-bottom: 80px;">
+    <div class="blog-layout">
+        
+        <div class="main-articles">
+            <?php foreach ($activities as $act): 
+                // Gắn type=activities để detail.php biết đường tìm đúng Google Sheet
+                $detail_link = "detail.php?type=activities&id=" . $act['id']; 
+            ?>
+            <article class="horizontal-card">
+                <a href="<?php echo $detail_link; ?>" class="h-card-image">
+                    <img src="<?php echo $act['image']; ?>" alt="Hình ảnh hoạt động">
+                </a>
+                
+                <div class="h-card-content">
+                    <a href="<?php echo $detail_link; ?>" class="h-card-title-link">
+                        <h3 class="h-card-title"><?php echo $act['title']; ?></h3>
                     </a>
+                    <p class="h-card-excerpt"><?php echo $act['excerpt']; ?></p>
+                </div>
+            </article>
+            <?php endforeach; ?>
+            
+            <?php if (empty($activities)): ?>
+                <p style="text-align: center; color: #666; font-style: italic; padding: 20px;">
+                    Hiện chưa có bài viết hoạt động nào.
+                </p>
+            <?php endif; ?>
+        </div>
 
-                    <a href="<?php echo $ms['link']; ?>" style="text-decoration: none;">
-                        <h3><?php echo $ms['title']; ?></h3>
-                    </a>
-                    
-                    <p><?php echo $ms['desc']; ?></p>
-                    <span class="time-badge"><?php echo $ms['time']; ?></span>
-                    
+        <aside class="sidebar">
+            <div class="widget">
+                <h3 class="widget-title">Hoạt động mới nhất</h3>
+                <div class="widget-content">
+                    <?php 
+                    // Cắt lấy 4 bài mới nhất
+                    $recent_posts = array_slice($activities, 0, 4);
+                    foreach ($recent_posts as $post): 
+                    ?>
+                        <div class="sidebar-post">
+                            <a href="detail.php?type=activities&id=<?php echo $post['id']; ?>" class="sp-image">
+                                <img src="<?php echo $post['image']; ?>" alt="Thumbnail">
+                            </a>
+                            <div class="sp-content">
+                                <a href="detail.php?type=activities&id=<?php echo $post['id']; ?>" class="sp-title">
+                                    <?php echo $post['title']; ?>
+                                </a>
+                                <span class="sp-date"><?php echo $post['date']; ?></span>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
-        <?php endforeach; ?>
+        </aside>
+
     </div>
 </main>
 

@@ -328,3 +328,239 @@ a {
     gap: 15px;
   }
 }
+
+/* ============================================================================
+   CAROUSEL LAYOUT - NEWS & SPONSORS (Cập nhật giao diện ĐẸP HƠN)
+   ============================================================================ */
+
+.Introduce_contents {
+  padding: 60px var(--page-padding) 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* Tiêu đề căn giữa */
+.section-header-center {
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.section-title-center {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #e68a00;
+  text-transform: uppercase;
+  display: inline-block;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.section-title-center::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -20px;
+  right: -20px;
+  height: 3px;
+  background: #e68a00;
+}
+
+/* Container chính của Carousel */
+.carousel-wrapper {
+  position: relative;
+  padding: 0 50px; /* Chừa chỗ cho nút mũi tên rộng hơn */
+}
+
+.carousel-track {
+  display: flex;
+  gap: 25px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-bottom: 25px; /* Chừa chỗ cho shadow rộng hơn */
+  /* Ẩn thanh cuộn mặc định */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Thẻ Card (Link) - Tinh chỉnh ĐẸP HƠN */
+.card-item {
+  flex: 0 0 calc(33.333% - 17px);
+  min-width: 280px;
+  background: #ffffff;
+  scroll-snap-align: start;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06); /* Shadow mềm hơn */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit; 
+  border: 1px solid #f1f5f9; /* Thêm đường viền toàn bộ thẻ cho xịn */
+}
+
+.card-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.card-item:hover .card-title {
+  color: var(--secondary-color);
+}
+
+/* Cục Ngày tháng - Tinh chỉnh sắc nét hơn */
+.date-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: var(--primary-color);
+  color: #fff;
+  width: 42px; /* Nhỏ lại tí cho tinh tế */
+  height: 48px;
+  border-radius: 6px; /* Bo góc nhẹ hơn */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.4);
+  line-height: 1;
+}
+
+.date-badge .day {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+.date-badge .month {
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-family: inherit; /* Đảm bảo phông chữ đồng bộ */
+}
+
+/* Ảnh Card */
+.card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #f1f5f9;
+  transition: transform 0.3s ease;
+}
+
+.card-item:hover .card-image {
+  transform: scale(1.03);
+}
+
+/* Nội dung Card */
+.card-content {
+  padding: 20px;
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+/* Tiêu đề & Cắt chữ - Tinh chỉnh size */
+.card-title {
+  color: var(--primary-dark);
+  font-size: 0.95rem; /* Giảm size tí cho nhã */
+  font-weight: 700;
+  margin-bottom: 10px;
+  line-height: 1.5;
+  transition: color 0.2s ease;
+  
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-excerpt {
+  color: var(--text-secondary);
+  font-size: 0.88rem; /* Giảm size tí cho nhã */
+  margin-bottom: 0;
+  line-height: 1.5;
+  
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ============================================================================
+   NÚT ĐIỀU HƯỚNG MỚI (Tròn, Xịn, Đẹp)
+   ============================================================================ */
+
+.carousel-btn {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  background: #ffffff; /* Nền trắng */
+  border: 1px solid #e2e8f0; /* Viền nhẹ */
+  width: 44px; /* Tròn đều */
+  height: 44px;
+  border-radius: 50%;
+  font-size: 1.1rem; /* Kích thước icon */
+  color: #333; /* Màu icon đậm hơn */
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1); /* Shadow mềm */
+}
+
+.carousel-btn:hover {
+  background: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+  box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+}
+
+.prev-btn { left: 0px; }
+.next-btn { right: 0px; }
+
+/* ============================================================================
+   CHẤM TRÒN (Dots) - Cập nhật Giao diện Thông minh
+   ============================================================================ */
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Khoảng cách rộng hơn tí */
+  margin-top: 30px;
+}
+
+.carousel-dots .dot {
+  width: 12px;
+  height: 12px;
+  background: transparent;
+  border: 2px solid #ccc; /* Đường viền inactive */
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-dots .dot.active {
+  background: #ccc; /* Đậm khi active */
+  border-color: #ccc;
+  width: 12px; /* Giữ nguyên size tròn */
+}

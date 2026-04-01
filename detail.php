@@ -1,29 +1,45 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 include 'header.php';
 include 'config.php';
 
+// 1. Lấy ID và Type từ URL
 $id = isset($_GET['id']) ? $_GET['id'] : null;
+$type = isset($_GET['type']) ? $_GET['type'] : 'notifications'; // Mặc định nếu không có type
 
 if (!$id) {
-    echo "Không tìm thấy bài viết!";
+    echo "<script>alert('Không tìm thấy bài viết!'); window.history.back();</script>";
     exit;
 }
 
-// 1. Lấy nội dung chi tiết của bài viết hiện tại
-$api_detail = BASE_URL . "/search?id=" . $id;
+// 2. Xác định tên Sheet cần gọi dữ liệu dựa vào Type
+$sheet_name = 'notifications'; // Mặc định
+if ($type === 'activities') {
+    $sheet_name = 'blog';
+} elseif ($type === 'sponsors') {
+    $sheet_name = 'sponsors';
+}
+
+// 3. Lấy nội dung chi tiết của bài viết hiện tại
+// Ghép thêm &sheet=tên_sheet vào link search để SheetDB biết cần tìm ở tab nào
+$api_detail = BASE_URL . "/search?id=" . $id . "&sheet=" . $sheet_name;
 $res_detail = @file_get_contents($api_detail);
 $data_detail = json_decode($res_detail, true);
 $article = $data_detail[0] ?? null;
 
 if (!$article) {
-    echo "Bài viết không tồn tại!";
+    echo "<script>alert('Bài viết không tồn tại!'); window.history.back();</script>";
     exit;
 }
 
-// 2. Lấy danh sách bài đăng mới cho Sidebar (Lấy toàn bộ để slice)
-// Dùng lại BASE_URL (không có /search)
-$res_all = @file_get_contents(BASE_URL);
+// 4. Lấy danh sách bài đăng mới cho Sidebar cùng thể loại
+// Ghép thêm ?sheet=tên_sheet vào BASE_URL
+$api_all = BASE_URL . "?sheet=" . $sheet_name;
+$res_all = @file_get_contents($api_all);
 $all_posts = json_decode($res_all, true);
+
 // Đảo ngược để bài mới nhất lên đầu và lấy 4 bài
 if ($all_posts) {
     $recent_posts = array_slice(array_reverse($all_posts), 0, 4);
@@ -42,8 +58,10 @@ if ($all_posts) {
             <img src="<?php echo $article['image']; ?>" alt="Ảnh bìa" class="article-main-image">
 
             <div class="article-meta-inline">
-                <span><i class="fas fa-user"></i> <?php echo strtoupper($article['author']); ?></span>
-                <span class="divider">|</span>
+                <?php if(!empty($article['author'])): ?>
+                    <span><i class="fas fa-user"></i> <?php echo strtoupper($article['author']); ?></span>
+                    <span class="divider">|</span>
+                <?php endif; ?>
                 <span><i class="far fa-calendar-alt"></i> <?php echo $article['date']; ?></span>
             </div>
 
@@ -52,19 +70,32 @@ if ($all_posts) {
             <div class="article-body">
                 <?php echo $article['content']; ?>
             </div>
+            
+            <div style="margin-top: 40px; border-top: 1px solid #eee; padding-top: 20px;">
+                <button onclick="window.history.back()" class="btn btn-outline" style="cursor: pointer; padding: 10px 20px; background: transparent; border: 1px solid #ccc; border-radius: 5px;">
+                    <i class="fas fa-arrow-left"></i> Quay lại
+                </button>
+            </div>
         </article>
 
         <aside class="sidebar">
             <div class="widget">
                 <h3 class="widget-title">Bài đăng mới</h3>
                 <div class="widget-content">
-                    <?php foreach ($recent_posts as $post): ?>
+                    <?php 
+                    $count = 0;
+                    foreach ($recent_posts as $post): 
+                        // Bỏ qua bài đang xem hiện tại để không bị lặp lại trong sidebar
+                        if ($post['id'] == $id) continue;
+                        if ($count >= 4) break;
+                        $count++;
+                    ?>
                         <div class="sidebar-post">
-                            <a href="detail.php?id=<?php echo $post['id']; ?>" class="sp-image">
+                            <a href="detail.php?type=<?php echo $type; ?>&id=<?php echo $post['id']; ?>" class="sp-image">
                                 <img src="<?php echo $post['image']; ?>" alt="Thumbnail">
                             </a>
                             <div class="sp-content">
-                                <a href="detail.php?id=<?php echo $post['id']; ?>" class="sp-title">
+                                <a href="detail.php?type=<?php echo $type; ?>&id=<?php echo $post['id']; ?>" class="sp-title">
                                     <?php echo $post['title']; ?>
                                 </a>
                                 <span class="sp-date"><?php echo $post['date']; ?></span>
