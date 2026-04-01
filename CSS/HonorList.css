@@ -1,44 +1,21 @@
 /* ============================================================================
-   GIAO DIỆN MỚI "TONE-SUR-TONE" CHO TRANG HONOR LIST (Đã tách riêng PHP & CSS)
+   GIAO DIỆN MỚI CHO TRANG HONOR LIST (ẢNH MẠNH THƯỜNG QUÂN TO HƠN)
    ============================================================================ */
 
-:root {
-    /* Đồng bộ với style.css chung */
-    --primary-color: #0d3b75; /* Màu xanh dương đậm chủ đạo từ style.css */
-    --secondary-color: #2563eb; /* Màu xanh dương tươi hơn cho hover */
-    --accent-color: #b45309; /* Màu đồng (muted gold) nhẹ cho icon, không chói lọi */
-    --text-primary: #1f2937; /* Màu chữ main từ style.css */
-    --text-secondary: #6b7280; /* Màu chữ phụ từ style.css */
-    --bg-primary: #ffffff; /* Nền trắng chủ đạo */
-    --bg-secondary: #f3f4f6; /* Nền xám rất nhẹ từ style.css */
-    --border-color: #e5e7eb; /* Màu viền từ style.css */
-    --error-color: #ef4444; /* Màu đỏ cho icon tim */
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-}
-
-/* --- HERO SECTION - TIÊU ĐỀ "TRI ÂN" THANH LỊCH, ĐỒNG BỘ --- */
+/* --- HERO SECTION (Giữ nguyên tông màu mới) --- */
 .hero-section.honor-list-hero {
     min-height: 250px; 
-    /* Thay đổi: Nền Hero chuyển về màu trắng tinh khôi cho đồng bộ */
-    background-color: var(--bg-primary); 
+    background-color: var(--bg-primary, #ffffff); 
     display: flex;
     align-items: center;
     padding-bottom: 50px;
-    border-bottom: 1px solid var(--border-color); /* Viền nhẹ để phân chia */
-}
-
-.hero-text.honor-text {
-    text-align: center;
-    flex: 1;
 }
 
 .hero-title1.honor-list-title {
     font-size: 3rem; 
     font-weight: 900; 
-    /* Thay đổi: Màu tiêu đề chuyển về xanh dương đậm chủ đạo */
-    color: var(--primary-color) !important; 
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Đổ bóng text tinh tế, ko còn chói */
+    color: var(--primary-color, #0d3b75) !important; 
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1); 
     text-transform: uppercase; 
     letter-spacing: 2px; 
     margin-bottom: 0px;
@@ -46,48 +23,43 @@
     display: inline-block;
 }
 
-/* Đường gạch dưới trang trí chuyển về xanh dương đậm */
-
-
-.honor-list-subtitle {
-    /* Thay đổi: Màu subtitle chuyển về xám trung tính */
-    color: var(--text-secondary); 
-    font-size: 1.1rem;
-    margin-top: 15px;
+.hero-title1.honor-list-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%; 
+    height: 3px;
+    background-color: var(--primary-color, #0d3b75);
+    border-radius: 2px;
 }
 
-/* Reponsive cho Mobile: Thu nhỏ bớt khi màn hình bé */
-@media screen and (max-width: 600px) {
-    .hero-title1.honor-list-title {
-        font-size: 2rem; 
-    }
-}
-
-/* --- HONOR CONTAINER & GRID (NỀN XÁM NHẸ ĐỂ NỔI THẺ) --- */
+/* --- HONOR CONTAINER & GRID (CĂN CHỈNH KHOẢNG CÁCH) --- */
 .honor-container {
     padding: 60px 0 100px;
-    /* Thay đổi: Nền container chuyển về xám rất nhẹ từ style.css */
-    background-color: var(--bg-secondary); 
+    background-color: var(--bg-secondary, #f3f4f6); 
 }
 
 .honor-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 65px 30px; 
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    /* --- TĂNG KHOẢNG CÁCH VERTICAL ĐỂ CHỪA CHỖ CHO ẢNH TO --- */
+    gap: 100px 30px; 
     max-width: 1200px;
-    margin: 40px auto 0;
-    padding: 0 var(--page-padding, 20px);
+    margin: 60px auto 0; /* Tăng margin-top để thẻ đầu tiên ko đè lên Hero */
+    padding: 0 20px;
 }
 
 .honor-plaque {
-    background: var(--bg-primary);
+    background: var(--bg-primary, #ffffff);
     border-radius: 16px;
-    padding: 55px 20px 30px;
+    /* --- TĂNG PADDING TOP ĐỂ CHỪA CHỖ CHO ẢNH TO --- */
+    padding: 90px 20px 30px;
     text-align: center;
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.1));
     position: relative;
-    /* Thay đổi: Viền vàng hoàng gia chuyển về xanh dương đậm chủ đạo */
-    border-top: 6px solid var(--primary-color); 
+    border-top: 6px solid var(--primary-color, #0d3b75); 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
@@ -97,18 +69,20 @@
 
 .honor-plaque:hover {
     transform: translateY(-10px);
-    box-shadow: var(--shadow-xl);
+    box-shadow: var(--shadow-xl, 0 20px 25px -5px rgba(0, 0, 0, 0.1));
 }
 
-/* Avatar lồi lên trên */
+/* Avatar lồi lên trên (Đã nâng cấp kích thước) */
 .plaque-avatar {
-    width: 100px;
-    height: 100px;
+    /* --- TĂNG KÍCH THƯỚC ẢNH LÊN 160px --- */
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
-    border: 5px solid var(--bg-primary);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border: 8px solid var(--bg-primary, #ffffff); /* Tăng độ dày viền trắng */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
     position: absolute;
-    top: -50px;
+    /* Đẩy ảnh lên cao hơn một nửa kích thước mới */
+    top: -80px; 
     left: 50%;
     transform: translateX(-50%);
     background: #f1f5f9;
@@ -117,57 +91,43 @@
 }
 
 .honor-plaque:hover .plaque-avatar {
-    transform: translateX(-50%) scale(1.05);
+    transform: translateX(-50%) scale(1.03); /* Zoom nhẹ hơn để ko bị vỡ ảnh */
 }
 
 .heart-icon {
-    /* Thay đổi: Giữ màu đỏ cho icon tim */
-    color: var(--error-color);
-    font-size: 1.5rem;
+    color: var(--error-color, #ef4444);
+    font-size: 1.8rem; /* Tăng icon tim */
     margin-bottom: 12px;
     animation: pulse 2s infinite;
 }
 
 .sponsor-name {
-    font-size: 1.25rem;
+    font-size: 1.3rem; /* Tăng font size tên */
     font-weight: 800;
-    /* Thay đổi: Màu tên main text trung tính */
-    color: var(--text-primary);
+    color: var(--text-primary, #1f2937);
     margin-bottom: 8px;
     line-height: 1.4;
 }
 
 .sponsor-label {
-    /* Thay đổi: Màu chữ phụ trung tính */
-    color: var(--text-secondary);
+    color: var(--text-secondary, #6b7280);
     font-size: 0.95rem;
     margin-bottom: auto; 
 }
 
-/* Khung hiển thị số tiền / hiện vật - MÀU SẮC ĐÃ CẬP NHẬT TONE-SUR-TONE */
+/* Khung hiển thị số tiền / hiện vật - MÀU SẮC ĐÃ CẬP NHẬT */
 .sponsor-contribution {
     font-size: 1.25rem;
     font-weight: 900;
-    /* Thay đổi: Màu chữ đóng góp chuyển về xanh dương đậm chủ đạo */
-    color: var(--primary-color); 
-    /* Thay đổi: Nền khung chuyển về xanh dương rất nhạt hoặc xám */
+    color: var(--primary-color, #0d3b75); 
     background: rgba(13, 59, 117, 0.1); 
     display: inline-block;
-    padding: 10px 25px;
+    padding: 10px 30px; /* Tăng padding */
     border-radius: 30px;
     margin-top: 20px;
-    /* Thay đổi: Viền khung nhạt đi cho tinh tế */
     border: 1px dashed rgba(13, 59, 117, 0.3);
     width: 100%;
     word-wrap: break-word;
-}
-
-/* Reponsive cho Mobile cho thẻ */
-@media screen and (max-width: 600px) {
-    .honor-grid {
-        grid-template-columns: 1fr;
-        padding: 0 30px;
-    }
 }
 
 /* CSS cho No data */
@@ -178,13 +138,19 @@
 }
 .no-data-wrapper i {
     font-size: 3rem; 
-    /* Thay đổi: Màu icon trung tính */
-    color: var(--border-color); 
+    color: var(--border-color, #e5e7eb); 
     margin-bottom: 20px;
 }
 .no-data-wrapper p {
     font-size: 1.2rem; 
-    color: var(--text-secondary);
+    color: var(--text-secondary, #6b7280);
+}
+
+/* Reponsive cho Mobile cho thẻ */
+@media screen and (max-width: 600px) {
+    .honor-grid { gap: 80px 20px; grid-template-columns: 1fr; padding: 0 30px;}
+    .plaque-avatar { width: 120px; height: 120px; top: -60px;}
+    .honor-plaque { padding-top: 70px;}
 }
 
 /* Hiệu ứng nhịp đập cho trái tim */
