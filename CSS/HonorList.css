@@ -1,6 +1,4 @@
-/* ============================================================================
-   GIAO DIỆN MỚI CHO TRANG HONOR LIST (ẢNH MẠNH THƯỜNG QUÂN TO HƠN)
-   ============================================================================ */
+
 
 /* --- HERO SECTION (Giữ nguyên tông màu mới) --- */
 .hero-section.honor-list-hero {
@@ -44,7 +42,6 @@
 .honor-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    /* --- TĂNG KHOẢNG CÁCH VERTICAL ĐỂ CHỪA CHỖ CHO ẢNH TO --- */
     gap: 100px 30px; 
     max-width: 1200px;
     margin: 60px auto 0; /* Tăng margin-top để thẻ đầu tiên ko đè lên Hero */
@@ -54,7 +51,6 @@
 .honor-plaque {
     background: var(--bg-primary, #ffffff);
     border-radius: 16px;
-    /* --- TĂNG PADDING TOP ĐỂ CHỪA CHỖ CHO ẢNH TO --- */
     padding: 90px 20px 30px;
     text-align: center;
     box-shadow: var(--shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.1));
@@ -72,16 +68,13 @@
     box-shadow: var(--shadow-xl, 0 20px 25px -5px rgba(0, 0, 0, 0.1));
 }
 
-/* Avatar lồi lên trên (Đã nâng cấp kích thước) */
 .plaque-avatar {
-    /* --- TĂNG KÍCH THƯỚC ẢNH LÊN 160px --- */
     width: 160px;
     height: 160px;
     border-radius: 50%;
-    border: 8px solid var(--bg-primary, #ffffff); /* Tăng độ dày viền trắng */
+    border: 8px solid var(--bg-prismary, #ffffff); 
     box-shadow: 0 5px 15px rgba(0,0,0,0.15);
     position: absolute;
-    /* Đẩy ảnh lên cao hơn một nửa kích thước mới */
     top: -80px; 
     left: 50%;
     transform: translateX(-50%);
@@ -91,18 +84,18 @@
 }
 
 .honor-plaque:hover .plaque-avatar {
-    transform: translateX(-50%) scale(1.03); /* Zoom nhẹ hơn để ko bị vỡ ảnh */
+    transform: translateX(-50%) scale(1.03); 
 }
 
 .heart-icon {
     color: var(--error-color, #ef4444);
-    font-size: 1.8rem; /* Tăng icon tim */
+    font-size: 1.8rem; 
     margin-bottom: 12px;
     animation: pulse 2s infinite;
 }
 
 .sponsor-name {
-    font-size: 1.3rem; /* Tăng font size tên */
+    font-size: 1.3rem; 
     font-weight: 800;
     color: var(--text-primary, #1f2937);
     margin-bottom: 8px;
@@ -115,14 +108,13 @@
     margin-bottom: auto; 
 }
 
-/* Khung hiển thị số tiền / hiện vật - MÀU SẮC ĐÃ CẬP NHẬT */
 .sponsor-contribution {
     font-size: 1.25rem;
     font-weight: 900;
     color: var(--primary-color, #0d3b75); 
     background: rgba(13, 59, 117, 0.1); 
     display: inline-block;
-    padding: 10px 30px; /* Tăng padding */
+    padding: 10px 30px; 
     border-radius: 30px;
     margin-top: 20px;
     border: 1px dashed rgba(13, 59, 117, 0.3);
@@ -130,7 +122,6 @@
     word-wrap: break-word;
 }
 
-/* CSS cho No data */
 .no-data-wrapper {
     grid-column: 1/-1; 
     text-align: center; 
@@ -146,14 +137,12 @@
     color: var(--text-secondary, #6b7280);
 }
 
-/* Reponsive cho Mobile cho thẻ */
 @media screen and (max-width: 600px) {
     .honor-grid { gap: 80px 20px; grid-template-columns: 1fr; padding: 0 30px;}
     .plaque-avatar { width: 120px; height: 120px; top: -60px;}
     .honor-plaque { padding-top: 70px;}
 }
 
-/* Hiệu ứng nhịp đập cho trái tim */
 @keyframes pulse {
     0% { transform: scale(1); }
     50% { transform: scale(1.15); }

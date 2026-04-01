@@ -195,7 +195,7 @@ if ($sponsors_home) {
             
             <div style="text-align: center; margin-top: 60px;">
                 <a href="HonorList.php" class="btn" style="background: var(--bg-primary); color: var(--primary-color, #0d3b75); border: 2px solid var(--primary-color, #0d3b75); padding: 12px 35px; border-radius: 30px; font-weight: 800; font-size: 1.1rem; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 10px; box-shadow: var(--shadow-md);">
-                    <i class="fas fa-award"></i> Xem Toàn Bộ Danh Sách Tri Ân
+                     Xem Toàn Bộ Danh Sách 
                 </a>
             </div>
 
