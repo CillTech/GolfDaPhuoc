@@ -19,11 +19,11 @@ if ($sponsors_all) {
 ?>
 
 <link rel="stylesheet" href="CSS/about.css">
-<link rel="stylesheet" href="CSS/HonorList.css"> <section class="hero-section honor-list-hero">
+<link rel="stylesheet" href="CSS/HonorList.css"> <section class="hero-section honor-list-hero" style="border-bottom: 1px solid #e5e7eb;">
     <div class="hero-content">
-        <div class="hero-text honor-text" style="text-align: center;">
-            <h1 class="hero-title1 honor-list-title">BẢNG VÀNG TRI ÂN</h1>
-            <p class="honor-list-subtitle">Chân thành cảm ơn những tấm lòng vàng đã chắp cánh ước mơ cho các em sinh viên</p>
+        <div class="hero-text honor-text" style="text-align: center; flex: 1;">
+            <h1 class="hero-title1 honor-list-title" style="color: var(--primary-color, #0d3b75) !important;">BẢNG VÀNG TRI ÂN</h1>
+            <p class="honor-list-subtitle" style="color: var(--text-secondary); margin-top: 15px;">Chân thành cảm ơn những tấm lòng vàng đã chắp cánh ước mơ cho các em sinh viên</p>
         </div>
     </div>
 </section>

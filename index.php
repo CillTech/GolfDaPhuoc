@@ -13,7 +13,7 @@ if ($activities_home) {
     $activities_home = [];
 }
 
-// 2. Kéo dữ liệu Mạnh thường quân từ Sheet 'sponsors' (Lấy 6 người cho đẹp đội hình)
+// 2. Kéo dữ liệu Mạnh thường quân từ Sheet 'sponsors' (Lấy 6 người)
 $sponsors_home = json_decode(@file_get_contents(URL_SPONSORS), true);
 if ($sponsors_home) {
     $sponsors_home = array_slice(array_reverse($sponsors_home), 0, 6);
@@ -94,28 +94,30 @@ if ($sponsors_home) {
             </div>
         </section>
 
-        <section class="news-section mt-5" style="margin-top: 80px;">
+        <section class="news-section mt-5" style="margin-top: 100px; padding-top: 50px;">
             <div class="section-header-center">
-                <h2 class="section-title-center">TRI ÂN MẠNH THƯỜNG QUÂN</h2>
+                <h2 class="section-title-center">BẢNG VÀNG TRI ÂN</h2>
             </div>
             
             <style>
                 .honor-grid {
                     display: grid;
-                    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-                    gap: 40px 30px;
+                    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                    /* Tăng khoảng cách vertical (gap-row) để chừa chỗ cho ảnh to */
+                    gap: 100px 30px; 
                     max-width: 1200px;
-                    margin: 60px auto 20px;
+                    margin: 80px auto 20px;
                     padding: 0 10px;
                 }
                 .honor-plaque {
                     background: #fff;
                     border-radius: 16px;
-                    padding: 50px 20px 30px;
+                    /* Tăng padding-top để chừa chỗ cho ảnh to nổi lên */
+                    padding: 90px 20px 30px; 
                     text-align: center;
                     box-shadow: 0 10px 25px rgba(0,0,0,0.06);
                     position: relative;
-                    border-top: 6px solid #fbbf24; /* Viền vàng hoàng gia */
+                    border-top: 6px solid var(--primary-color, #0d3b75); 
                     transition: transform 0.3s ease, box-shadow 0.3s ease;
                 }
                 .honor-plaque:hover {
@@ -123,39 +125,47 @@ if ($sponsors_home) {
                     box-shadow: 0 15px 35px rgba(0,0,0,0.12);
                 }
                 .plaque-avatar {
-                    width: 90px;
-                    height: 90px;
+                    /* --- TĂNG KÍCH THƯỚC ẢNH LÊN 160px --- */
+                    width: 160px;
+                    height: 160px;
                     border-radius: 50%;
-                    border: 5px solid #fff;
-                    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                    border: 8px solid #fff; /* Tăng độ dày viền trắng cho cân đối */
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
                     position: absolute;
-                    top: -45px;
+                    /* Đẩy ảnh lên cao hơn một nửa kích thước mới */
+                    top: -80px; 
                     left: 50%;
                     transform: translateX(-50%);
                     background: #f8fafc;
                     object-fit: cover;
                 }
                 .sponsor-name {
-                    font-size: 1.25rem;
+                    font-size: 1.3rem; /* Tăng nhẹ font size tên cho cân */
                     font-weight: 800;
                     color: var(--text-primary);
                     margin-bottom: 5px;
                 }
                 .sponsor-contribution {
-                    font-size: 1.2rem;
+                    font-size: 1.25rem;
                     font-weight: 900;
-                    color: #d97706;
-                    background: #fef3c7;
+                    color: var(--primary-color, #0d3b75);
+                    background: rgba(13, 59, 117, 0.1); 
                     display: inline-block;
-                    padding: 8px 25px;
+                    padding: 10px 30px;
                     border-radius: 30px;
                     margin-top: 15px;
-                    border: 1px dashed #f59e0b;
+                    border: 1px dashed rgba(13, 59, 117, 0.3);
                 }
                 .heart-icon {
                     color: #ef4444;
-                    font-size: 1.5rem;
+                    font-size: 1.8rem; /* Tăng icon tim */
                     margin-bottom: 10px;
+                }
+                /* Reponsive cho Mobile */
+                @media (max-width: 600px) {
+                    .honor-grid { gap: 80px 20px; grid-template-columns: 1fr;}
+                    .plaque-avatar { width: 120px; height: 120px; top: -60px;}
+                    .honor-plaque { padding-top: 70px;}
                 }
             </style>
 
@@ -183,9 +193,9 @@ if ($sponsors_home) {
                 ?>
             </div>
             
-            <div style="text-align: center; margin-top: 50px;">
-                <a href="HonorList.php" class="btn" style="background: #fffbeb; color: #d97706; border: 2px solid #fbbf24; padding: 12px 35px; border-radius: 30px; font-weight: 800; font-size: 1.1rem; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 10px rgba(251, 191, 36, 0.2);">
-                     Xem Toàn Bộ Danh Sách
+            <div style="text-align: center; margin-top: 60px;">
+                <a href="HonorList.php" class="btn" style="background: var(--bg-primary); color: var(--primary-color, #0d3b75); border: 2px solid var(--primary-color, #0d3b75); padding: 12px 35px; border-radius: 30px; font-weight: 800; font-size: 1.1rem; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 10px; box-shadow: var(--shadow-md);">
+                    <i class="fas fa-award"></i> Xem Toàn Bộ Danh Sách Tri Ân
                 </a>
             </div>
 
