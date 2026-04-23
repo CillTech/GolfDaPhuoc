@@ -8,4 +8,6 @@ define('URL_BLOG', BASE_URL . '?sheet=blog');
 define('URL_BDH', BASE_URL . '?sheet=bdh');
 define('URL_SPONSORS', BASE_URL . '?sheet=sponsors');
 define('URL_ACTIVITIES', BASE_URL . '?sheet=activities');
+define('URL_HERO_BG', BASE_URL . '?sheet=defaults');
+define('URL_ABOUT_DATA', BASE_URL . '?sheet=abouts');
 ?>

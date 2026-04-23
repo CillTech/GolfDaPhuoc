@@ -12,15 +12,29 @@ if ($activities) {
 
 // Nếu lấy dữ liệu thất bại, gán mảng rỗng
 if (!$activities) $activities = [];
+$settings = json_decode(@file_get_contents(URL_HERO_BG), true);
+$notification_banner_url = $settings[4]['link'] ?? 'Image/default-notification.jpg'; 
 ?>
 
 <link rel="stylesheet" href="CSS/about.css">
-<link rel="stylesheet" href="CSS/notifications.css">
+<link rel="stylesheet" href="CSS/notifications.css"> 
 
-<section class="hero-section" style="min-height: 200px;">
-    <div class="hero-content" style="grid-template-columns: 1fr;">
-        <div class="hero-text" style="text-align: center;">
-            <h1 class="hero-title1" style="text-align: center;">Thông Báo</h1>
+<style>
+    .hero-section {
+    position: relative;
+    /* Lớp phủ 0.4 cho độ sáng vừa phải, bạn có thể chỉnh lại nếu tối/sáng quá */
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('<?php echo $notification_banner_url; ?>');
+    background-size: cover;
+    background-position: center 50%;
+    min-height: 400px; 
+    overflow: hidden; 
+}
+</style>
+
+<section class="hero-section text-center">
+    <div class="hero-content">
+        <div class="hero-text full-width">
+            <h1 class="hero-title">Thông Báo</h1>
         </div>
     </div>
 </section>

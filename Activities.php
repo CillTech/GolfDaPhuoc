@@ -5,6 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 include 'header.php';
 include 'config.php';
 
+// 1. Lấy dữ liệu bài viết hoạt động
 $api_url = URL_BLOG;
 $response = @file_get_contents($api_url);
 $activities = json_decode($response, true);
@@ -14,12 +15,30 @@ if ($activities) {
 } else {
     $activities = []; 
 }
+
+$settings = json_decode(@file_get_contents(URL_HERO_BG), true);
+$activities_banner_url = $settings[3]['link'] ?? ''; 
 ?>
 
 <link rel="stylesheet" href="CSS/about.css">
-<link rel="stylesheet" href="CSS/activities.css"> <section class="hero-section">
+<link rel="stylesheet" href="CSS/activities.css"> 
+
+<style>
+    .hero-section {
+    position: relative;
+    background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('<?php echo $activities_banner_url; ?>');
+    background-size: cover;
+    background-position: center 50%;
+    min-height: 400px; 
+    overflow: hidden; 
+}
+</style>
+
+<section class="hero-section text-center">
     <div class="hero-content">
-        <h1 class="hero-title1" style="text-align: center;">Hoạt Động</h1>
+        <div class="hero-text full-width">
+            <h1 class="hero-title">Hoạt Động</h1>
+        </div>
     </div>
 </section>
 

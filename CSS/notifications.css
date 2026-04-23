@@ -7,16 +7,6 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
-.hero-section {
-    opacity: 0; 
-    animation: fadeInUp 0.8s ease-out forwards;
-    position: relative;
-    background-image: url('../Image/act-1.jpg'); /* Cập nhật ảnh của bạn vào đây */
-    background-size: cover;
-    background-position: center 25%;
-    min-height: 200px !important; 
-    overflow: hidden; 
-}
 
 /* Lớp phủ làm tối ảnh nền */
 .hero-section::before {

@@ -1,8 +1,15 @@
 <?php include 'header.php'; ?>
+<?php include 'config.php'; ?>
+
+<?php
+$settings = json_decode(@file_get_contents(URL_HERO_BG), true);
+$sponsor_banner_url = $settings[3]['link'] ?? 'Image/default-sponsor.jpg'; 
+?>
+
 <link rel="stylesheet" href="CSS/about.css">
 <link rel="stylesheet" href="CSS/sponsorship.css">
 
-<section class="hero-section text-center">
+<section class="hero-section text-center" style="background-image: linear-gradient(rgba(87, 81, 81, 0.3), rgba(97, 88, 88, 0.3)), url('<?php echo $sponsor_banner_url; ?>'); background-size: cover; background-position: center 60%;">
     <div class="hero-content">
         <div class="hero-text full-width">
             <h1 class="hero-title">Chung Tay Tiếp Sức Ước Mơ</h1>

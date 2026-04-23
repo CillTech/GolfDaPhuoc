@@ -18,7 +18,7 @@
   color: #ffffff;
   font-size: 1rem;
   font-weight: 600;
-  border-radius: 8px; /* Bo góc nhẹ nhàng */
+  border-radius: 8px;
   text-decoration: none;
   border: 1px solid transparent;
   transition: background-color 0.3s ease, transform 0.2s ease;
@@ -27,8 +27,8 @@
 }
 
 .btn-normal:hover {
-  background-color: var(--primary-dark, #1d4ed8); /* Đậm hơn khi di chuột */
-  transform: translateY(-2px); /* Chỉ nhích lên một chút cho có cảm giác bấm */
+  background-color: var(--primary-dark, #1d4ed8);
+  transform: translateY(-2px);
   color: #ffffff;
 }
 
@@ -45,7 +45,7 @@
   padding: 40px;
   background: var(--bg-primary, #ffffff);
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Bóng đổ nhẹ, phẳng */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   border: 1px solid var(--border-color, #e5e7eb);
 }
 
@@ -58,6 +58,17 @@
 
 .section-title.center-text {
   text-align: center;
+}
+
+.about-hero {
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    min-height: 400px; 
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .section-content p {
@@ -137,6 +148,54 @@
 }
 
 /* ============================================================================
+   DANH SÁCH CON (Sub-list) VÀ HIỆU ỨNG THẺ
+   ============================================================================ */
+.value-item .sub-list {
+    padding-left: 25px;
+    margin-top: 8px;
+    margin-bottom: 10px;
+}
+
+.value-item .sub-list li {
+    font-size: 0.9em;
+    color: #555555;
+    list-style-type: disc;
+    text-align: left;
+}
+
+.about-card, 
+.value-item {
+    border: 1px solid #e5e7eb;
+    border-top: 5px solid #2563eb;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.about-card:hover, 
+.value-item:hover {
+    border-top-width: 8px;
+    transform: translateY(-5px);
+}
+
+/* ============================================================================
+   CĂN CHỈNH HEADER: TIÊU ĐỀ & NÚT BẤM NGANG HÀNG
+   ============================================================================ */
+.orientation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.orientation-header .section-title {
+    margin-bottom: 0; 
+}
+
+.orientation-header .btn-normal {
+    margin-top: 0; 
+}
+
+/* ============================================================================
    RESPONSIVE
    ============================================================================ */
 @media (max-width: 768px) {
@@ -147,33 +206,28 @@
   .about-section {
     padding: 20px;
   }
+  
+  .orientation-header {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+  
+  .orientation-header .section-title {
+      margin-bottom: 10px;
+  }
+
+  .orientation-header .btn-normal {
+      margin-top: 10px;
+  }
 }
 
-/* Định dạng cho toàn bộ khối list con */
-.value-item .sub-list {
-    padding-left: 25px; /* Đẩy nguyên khối list con lùi vào trong 25px */
-    margin-top: 8px;    /* Cách dòng chữ cha ở trên một chút cho thoáng */
-    margin-bottom: 10px; /* Cách dòng chữ bên dưới một chút */
-}
-
-/* Định dạng cho từng dòng chữ bên trong list con */
-.value-item .sub-list li {
-    font-size: 0.9em;       /* Chữ nhỏ hơn 10% so với bình thường */
-    color: #555555;         /* (Tùy chọn) Làm màu chữ nhạt đi một xíu để phân cấp rõ hơn */
-    list-style-type: disc;  /* (Tùy chọn) Hiển thị dấu chấm tròn đầu dòng */
-    text-align: left;       /* Ép chữ căn trái để dễ đọc hơn nếu khối bên ngoài đang bị căn giữa */
-}
-
-.about-card, 
-.value-item {
-    border: 1px solid #e5e7eb; /* Viền mờ bao quanh để giữ khung */
-    border-top: 5px solid #2563eb; /* Cạnh trên dày và có màu xanh nổi bật */
-    border-radius: 12px; /* Giữ bo góc */
-    transition: transform 0.3s ease;
-}
-
-.about-card:hover, 
-.value-item:hover {
-    border-top-width: 8px; /* Dày lên một chút khi di chuột vào */
-    transform: translateY(-5px);
+.about-hero {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 600px; 
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
