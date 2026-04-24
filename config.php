@@ -1,7 +1,25 @@
 <?php
+// ==========================================
+// 1. HÀM ĐỌC FILE .ENV (Dùng cho máy cá nhân)
+// ==========================================
+function loadEnv($path) {
+    if (!file_exists($path)) return;
+    $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        if (strpos(trim($line), '#') === 0) continue;
+        list($name, $value) = explode('=', $line, 2);
+        $name = trim($name);
+        $value = trim($value, " \t\n\r\0\x0B\"'"); 
+        putenv(sprintf('%s=%s', $name, $value));
+        $_ENV[$name] = $value;
+    }
+}
+
+// Chạy hàm nạp file .env
+loadEnv(__DIR__ . '/.env');
 // config.php
-define('API_ID', '35gcpz5t5e79i');
-define('BASE_URL', 'https://sheetdb.io/api/v1/' . API_ID);
+define('API_LINK',getenv('SHEETDB_API_LINK'));
+define('BASE_URL', API_LINK);
 
 define('URL_NOTIFICATIONS', BASE_URL . '?sheet=notifications');
 define('URL_BLOG', BASE_URL . '?sheet=blog');
